@@ -121,7 +121,7 @@ function generateClassicTemplate(formData: FormData, workExperiences: WorkExperi
     doc.text(contactInfo, margins.left, y);
     y += 5;
   }
-  
+
   // LinkedIn and GitHub
   if (formData.linkedin || formData.github) {
     const links = [];
@@ -132,7 +132,7 @@ function generateClassicTemplate(formData: FormData, workExperiences: WorkExperi
   } else {
     y += 3;
   }
-  
+
   // Professional Title
   if (formData.professionalTitle) {
     doc.setFont("helvetica", "bold");
@@ -163,15 +163,15 @@ function generateClassicTemplate(formData: FormData, workExperiences: WorkExperi
   // Helper functions for each section
   const renderWorkExperience = () => {
     if (!workExperiences.some(exp => exp.jobTitle || exp.company)) return;
-    
+
     checkPageSpace(20);
-    
+
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
     doc.text("WORK EXPERIENCE", margins.left, y);
     y += 2;
-    
+
     doc.setDrawColor(0, 0, 0);
     doc.setLineWidth(0.5);
     doc.line(margins.left, y, pageWidth - margins.right, y);
@@ -180,12 +180,12 @@ function generateClassicTemplate(formData: FormData, workExperiences: WorkExperi
     workExperiences.forEach(exp => {
       if (exp.jobTitle || exp.company) {
         checkPageSpace(15);
-        
+
         // Job title and dates
         doc.setFont("helvetica", "bold");
         doc.setFontSize(10);
         doc.text(exp.jobTitle, margins.left, y);
-        
+
         if (exp.startDate || exp.endDate) {
           const dateRange = `${exp.startDate} – ${exp.endDate}`;
           doc.setFont("helvetica", "normal");
@@ -228,15 +228,15 @@ function generateClassicTemplate(formData: FormData, workExperiences: WorkExperi
 
   const renderEducation = () => {
     if (!education.some(edu => edu.degree || edu.institution)) return;
-    
+
     checkPageSpace(20);
-    
+
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
     doc.text("EDUCATION", margins.left, y);
     y += 2;
-    
+
     doc.setDrawColor(0, 0, 0);
     doc.setLineWidth(0.5);
     doc.line(margins.left, y, pageWidth - margins.right, y);
@@ -245,12 +245,12 @@ function generateClassicTemplate(formData: FormData, workExperiences: WorkExperi
     education.forEach(edu => {
       if (edu.degree || edu.institution) {
         checkPageSpace(15);
-        
+
         // Degree and Year
         doc.setFont("helvetica", "bold");
         doc.setFontSize(10);
         doc.text(edu.degree, margins.left, y);
-        
+
         if (edu.year) {
           doc.setFont("helvetica", "normal");
           doc.text(edu.year, pageWidth - margins.right, y, { align: "right" });
@@ -292,15 +292,15 @@ function generateClassicTemplate(formData: FormData, workExperiences: WorkExperi
 
   const renderSkills = () => {
     if (!formData.skills) return;
-    
+
     checkPageSpace(20);
-    
+
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
     doc.text("SKILLS", margins.left, y);
     y += 2;
-    
+
     doc.setDrawColor(0, 0, 0);
     doc.setLineWidth(0.5);
     doc.line(margins.left, y, pageWidth - margins.right, y);
@@ -320,15 +320,15 @@ function generateClassicTemplate(formData: FormData, workExperiences: WorkExperi
 
   const renderCertifications = () => {
     if (!formData.certifications) return;
-    
+
     checkPageSpace(20);
-    
+
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
     doc.text("CERTIFICATIONS", margins.left, y);
     y += 2;
-    
+
     doc.setDrawColor(0, 0, 0);
     doc.setLineWidth(0.5);
     doc.line(margins.left, y, pageWidth - margins.right, y);
@@ -348,15 +348,15 @@ function generateClassicTemplate(formData: FormData, workExperiences: WorkExperi
 
   const renderReferences = () => {
     if (!references.some(ref => ref.name || ref.contact)) return;
-    
+
     checkPageSpace(20);
-    
+
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
     doc.text("REFERENCES", margins.left, y);
     y += 2;
-    
+
     doc.setDrawColor(0, 0, 0);
     doc.setLineWidth(0.5);
     doc.line(margins.left, y, pageWidth - margins.right, y);
@@ -365,7 +365,7 @@ function generateClassicTemplate(formData: FormData, workExperiences: WorkExperi
     references.forEach(ref => {
       if (ref.name || ref.contact) {
         checkPageSpace(10);
-        
+
         doc.setFont("helvetica", "bold");
         doc.setFontSize(10);
         doc.text(ref.name, margins.left, y);
@@ -420,7 +420,7 @@ function generateModernTemplate(formData: FormData, workExperiences: WorkExperie
     // Draw circle border
     doc.setDrawColor(37, 99, 235);
     doc.setLineWidth(0.5);
-    doc.circle(imgX + imgSize/2, imgY + imgSize/2, imgSize/2, 'S');
+    doc.circle(imgX + imgSize / 2, imgY + imgSize / 2, imgSize / 2, 'S');
   }
 
   // Name - Large and minimal
@@ -442,7 +442,7 @@ function generateModernTemplate(formData: FormData, workExperiences: WorkExperie
   doc.setTextColor(100, 116, 139);
   doc.text(`${formData.email}  •  ${formData.phone}`, 20, y);
   y += 5;
-  
+
   // LinkedIn and GitHub
   if (formData.linkedin || formData.github) {
     const linksInfo = [formData.linkedin, formData.github].filter(Boolean).join("  •  ");
@@ -565,7 +565,7 @@ function generateModernTemplate(formData: FormData, workExperiences: WorkExperie
     doc.setTextColor(37, 99, 235);
     doc.text("References", 20, y);
     y += 7;
-    
+
     references.forEach(ref => {
       if (ref.name || ref.contact) {
         doc.setFontSize(10);
@@ -574,7 +574,7 @@ function generateModernTemplate(formData: FormData, workExperiences: WorkExperie
         doc.text(ref.name, 20, y);
         doc.setFont(undefined, "normal");
         y += 5;
-        
+
         if (ref.contact) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -582,7 +582,7 @@ function generateModernTemplate(formData: FormData, workExperiences: WorkExperie
           doc.text(contactLines, 20, y);
           y += contactLines.length * 5 + 5;
         }
-        
+
         if (y > 270) {
           doc.addPage();
           y = 20;
@@ -610,22 +610,22 @@ function generateCreativeTemplate(formData: FormData, workExperiences: WorkExper
     const imgY = 7.5;
     // White circle background
     doc.setFillColor(255, 255, 255);
-    doc.circle(imgX + imgSize/2, imgY + imgSize/2, imgSize/2 + 1, 'F');
+    doc.circle(imgX + imgSize / 2, imgY + imgSize / 2, imgSize / 2 + 1, 'F');
     doc.addImage(formData.photo, 'JPEG', imgX, imgY, imgSize, imgSize);
     doc.setDrawColor(255, 255, 255);
     doc.setLineWidth(1);
-    doc.circle(imgX + imgSize/2, imgY + imgSize/2, imgSize/2, 'S');
+    doc.circle(imgX + imgSize / 2, imgY + imgSize / 2, imgSize / 2, 'S');
   }
 
   // Name in white
   doc.setFontSize(26);
   doc.setTextColor(255, 255, 255);
   doc.text(formData.fullName, 20, 20);
-  
+
   // Contact in white
   doc.setFontSize(10);
   doc.text(`${formData.email} | ${formData.phone}`, 20, 30);
-  
+
   // Professional Title
   if (formData.professionalTitle) {
     doc.setFontSize(12);
@@ -634,7 +634,7 @@ function generateCreativeTemplate(formData: FormData, workExperiences: WorkExper
   } else {
     y = 55;
   }
-  
+
   // LinkedIn and GitHub
   if (formData.linkedin || formData.github) {
     doc.setFontSize(9);
@@ -667,14 +667,14 @@ function generateCreativeTemplate(formData: FormData, workExperiences: WorkExper
         // Accent line
         doc.setFillColor(37, 99, 235);
         doc.rect(15, y - 3, 2, 15, "F");
-        
+
         doc.setFontSize(12);
         doc.setTextColor(15, 23, 42);
         doc.setFont(undefined, "bold");
         doc.text(exp.jobTitle, 22, y);
         doc.setFont(undefined, "normal");
         y += 6;
-        
+
         doc.setFontSize(10);
         doc.setTextColor(100, 116, 139);
         doc.text(`${exp.company} | ${exp.startDate} - ${exp.endDate}`, 22, y);
@@ -731,10 +731,10 @@ function generateCreativeTemplate(formData: FormData, workExperiences: WorkExper
     doc.setTextColor(37, 99, 235);
     doc.text("SKILLS", 20, y);
     y += 8;
-    
+
     doc.setFillColor(219, 234, 254);
     doc.roundedRect(15, y - 3, 180, 15, 2, 2, "F");
-    
+
     doc.setFontSize(10);
     doc.setTextColor(15, 23, 42);
     const skillsLines = doc.splitTextToSize(formData.skills, 170);
@@ -747,14 +747,14 @@ function generateCreativeTemplate(formData: FormData, workExperiences: WorkExper
 // Executive Template - Dark sidebar with premium look
 function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExperience[], education: Education[], references: Reference[], sectionOrder: Section[]) {
   const doc = new jsPDF();
-  
+
   // Dark sidebar background
   doc.setFillColor(30, 41, 59); // slate-800
   doc.rect(0, 0, 70, 297, "F");
-  
+
   let y = 25;
   let sideY = 25;
-  
+
   // Photo on sidebar - rounded square
   if (formData.photo) {
     const imgSize = 45;
@@ -765,14 +765,14 @@ function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExpe
     doc.roundedRect(imgX, sideY, imgSize, imgSize, 2, 2, 'S');
     sideY += imgSize + 10;
   }
-  
+
   // Name on sidebar - white
   doc.setFontSize(18);
   doc.setTextColor(255, 255, 255);
   const nameLines = doc.splitTextToSize(formData.fullName, 55);
   doc.text(nameLines, 10, sideY);
   sideY += nameLines.length * 7 + 10;
-  
+
   // Professional Title
   if (formData.professionalTitle) {
     doc.setFontSize(10);
@@ -781,7 +781,7 @@ function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExpe
     doc.text(titleLines, 10, sideY);
     sideY += titleLines.length * 5 + 8;
   }
-  
+
   // Contact on sidebar
   doc.setFontSize(9);
   doc.setTextColor(203, 213, 225);
@@ -809,7 +809,7 @@ function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExpe
     doc.text(githubLines, 10, sideY);
     sideY += githubLines.length * 5 + 10;
   }
-  
+
   // Skills on sidebar
   if (formData.skills) {
     doc.setFontSize(12);
@@ -821,10 +821,10 @@ function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExpe
     const skillsLines = doc.splitTextToSize(formData.skills, 55);
     doc.text(skillsLines, 10, sideY);
   }
-  
+
   // Main content area
   const mainX = 75;
-  
+
   // Summary
   if (formData.summary) {
     doc.setFontSize(11);
@@ -837,14 +837,14 @@ function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExpe
     doc.text(summaryLines, mainX, y);
     y += summaryLines.length * 5 + 10;
   }
-  
+
   // Work Experience
   if (workExperiences.some(exp => exp.jobTitle)) {
     doc.setFontSize(11);
     doc.setTextColor(37, 99, 235);
     doc.text("WORK EXPERIENCE", mainX, y);
     y += 7;
-    
+
     workExperiences.forEach(exp => {
       if (exp.jobTitle) {
         doc.setFontSize(11);
@@ -857,7 +857,7 @@ function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExpe
         doc.setTextColor(100, 116, 139);
         doc.text(`${exp.company} | ${exp.startDate} - ${exp.endDate}`, mainX, y);
         y += 5;
-        
+
         if (exp.description) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -865,7 +865,7 @@ function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExpe
           doc.text(lines, mainX, y);
           y += lines.length * 4 + 6;
         }
-        
+
         if (y > 270) {
           doc.addPage();
           y = 20;
@@ -873,7 +873,7 @@ function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExpe
       }
     });
   }
-  
+
   return doc;
 }
 
@@ -881,7 +881,7 @@ function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExpe
 function generateTechTemplate(formData: FormData, workExperiences: WorkExperience[], education: Education[], references: Reference[], sectionOrder: Section[]) {
   const doc = new jsPDF();
   let y = 25;
-  
+
   // Photo - Square with green border
   if (formData.photo) {
     const imgSize = 28;
@@ -891,26 +891,26 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
     doc.setLineWidth(1);
     doc.rect(imgX, y, imgSize, imgSize, 'S');
   }
-  
+
   // Name - Large
   doc.setFontSize(22);
   doc.setTextColor(16, 185, 129); // green
   doc.text(formData.fullName.toUpperCase(), 20, y);
   y += 8;
-  
+
   // Title/Role line
   doc.setFontSize(11);
   doc.setTextColor(71, 85, 105);
   doc.text("TECHNICAL PROFESSIONAL", 20, y);
   y += 12;
-  
+
   // Contact - inline with bullets
   doc.setFontSize(9);
   doc.setTextColor(100, 116, 139);
   const contact = [formData.email, formData.phone, formData.address].filter(Boolean).join(" • ");
   doc.text(contact, 20, y);
   y += 15;
-  
+
   // Summary
   if (formData.summary) {
     doc.setFontSize(12);
@@ -923,7 +923,7 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
     doc.text(summaryLines, 20, y);
     y += summaryLines.length * 5 + 12;
   }
-  
+
   // Skills
   if (formData.skills) {
     doc.setFontSize(12);
@@ -936,14 +936,14 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
     doc.text(skillsLines, 20, y);
     y += skillsLines.length * 5 + 12;
   }
-  
+
   // Work Experience
   if (workExperiences.some(exp => exp.jobTitle)) {
     doc.setFontSize(12);
     doc.setTextColor(16, 185, 129);
     doc.text("// WORK EXPERIENCE", 20, y);
     y += 7;
-    
+
     workExperiences.forEach(exp => {
       if (exp.jobTitle) {
         doc.setFontSize(11);
@@ -956,7 +956,7 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
         doc.setTextColor(100, 116, 139);
         doc.text(`${exp.company} | ${exp.startDate} - ${exp.endDate}`, 25, y);
         y += 5;
-        
+
         if (exp.description) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -964,7 +964,7 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
           doc.text(lines, 25, y);
           y += lines.length * 4 + 8;
         }
-        
+
         if (y > 270) {
           doc.addPage();
           y = 20;
@@ -972,7 +972,7 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
       }
     });
   }
-  
+
   // Education
   if (education.some(edu => edu.degree)) {
     if (y > 250) {
@@ -983,7 +983,7 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
     doc.setTextColor(16, 185, 129);
     doc.text("// EDUCATION", 20, y);
     y += 7;
-    
+
     education.forEach(edu => {
       if (edu.degree) {
         doc.setFontSize(10);
@@ -998,7 +998,7 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
     });
     y += 5;
   }
-  
+
   // Skills
   if (formData.skills) {
     if (y > 250) {
@@ -1043,14 +1043,14 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
     doc.setTextColor(16, 185, 129);
     doc.text("// REFERENCES", 20, y);
     y += 7;
-    
+
     references.forEach(ref => {
       if (ref.name || ref.contact) {
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
         doc.text(`> ${ref.name}`, 20, y);
         y += 5;
-        
+
         if (ref.contact) {
           doc.setFontSize(9);
           doc.setTextColor(100, 116, 139);
@@ -1058,7 +1058,7 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
           doc.text(contactLines, 25, y);
           y += contactLines.length * 4 + 6;
         }
-        
+
         if (y > 270) {
           doc.addPage();
           y = 20;
@@ -1066,7 +1066,7 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
       }
     });
   }
-  
+
   return doc;
 }
 
@@ -1074,7 +1074,7 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
 function generateAcademicTemplate(formData: FormData, workExperiences: WorkExperience[], education: Education[], references: Reference[], sectionOrder: Section[]) {
   const doc = new jsPDF();
   let y = 30;
-  
+
   // Photo - Small, top right corner
   if (formData.photo) {
     const imgSize = 22;
@@ -1085,13 +1085,13 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
     doc.setLineWidth(0.5);
     doc.rect(imgX, imgY, imgSize, imgSize, 'S');
   }
-  
+
   // Name - Centered, large
   doc.setFontSize(24);
   doc.setTextColor(15, 23, 42);
   doc.text(formData.fullName, 105, y, { align: "center" });
   y += 8;
-  
+
   // Professional Title
   if (formData.professionalTitle) {
     doc.setFontSize(12);
@@ -1099,7 +1099,7 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
     doc.text(formData.professionalTitle, 105, y, { align: "center" });
     y += 6;
   }
-  
+
   // Contact - Centered, small
   doc.setFontSize(9);
   doc.setTextColor(100, 116, 139);
@@ -1109,7 +1109,7 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
   }
   doc.text(`${formData.email} | ${formData.phone}`, 105, y, { align: "center" });
   y += 4;
-  
+
   // LinkedIn and GitHub
   if (formData.linkedin || formData.github) {
     const linksInfo = [formData.linkedin, formData.github].filter(Boolean).join("   ");
@@ -1118,19 +1118,19 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
   } else {
     y += 11;
   }
-  
+
   // Horizontal line
   doc.setDrawColor(37, 99, 235);
   doc.line(20, y, 190, y);
   y += 10;
-  
+
   // Education FIRST (academic style)
   if (education.some(edu => edu.degree)) {
     doc.setFontSize(13);
     doc.setTextColor(37, 99, 235);
     doc.text("EDUCATION", 20, y);
     y += 7;
-    
+
     education.forEach(edu => {
       if (edu.degree) {
         doc.setFontSize(11);
@@ -1147,7 +1147,7 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
     });
     y += 5;
   }
-  
+
   // Research/Summary
   if (formData.summary) {
     doc.setFontSize(13);
@@ -1160,14 +1160,14 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
     doc.text(summaryLines, 20, y);
     y += summaryLines.length * 5 + 10;
   }
-  
+
   // Experience
   if (workExperiences.some(exp => exp.jobTitle)) {
     doc.setFontSize(13);
     doc.setTextColor(37, 99, 235);
     doc.text("PROFESSIONAL EXPERIENCE", 20, y);
     y += 7;
-    
+
     workExperiences.forEach(exp => {
       if (exp.jobTitle) {
         doc.setFontSize(11);
@@ -1180,7 +1180,7 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
         doc.setTextColor(100, 116, 139);
         doc.text(`${exp.company}, ${exp.startDate} - ${exp.endDate}`, 20, y);
         y += 5;
-        
+
         if (exp.description) {
           doc.setFontSize(10);
           doc.setTextColor(71, 85, 105);
@@ -1188,7 +1188,7 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
           doc.text(lines, 20, y);
           y += lines.length * 5 + 7;
         }
-        
+
         if (y > 270) {
           doc.addPage();
           y = 20;
@@ -1196,7 +1196,7 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
       }
     });
   }
-  
+
   // Skills
   if (formData.skills) {
     if (y > 250) {
@@ -1212,21 +1212,21 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
     const skillsLines = doc.splitTextToSize(formData.skills, 170);
     doc.text(skillsLines, 20, y);
   }
-  
+
   return doc;
 }
 
 // Two Column Template - Sidebar with colored accent
 function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExperience[], education: Education[], references: Reference[], sectionOrder: Section[]) {
   const doc = new jsPDF();
-  
+
   // Colored sidebar
   doc.setFillColor(219, 234, 254); // light blue
   doc.rect(0, 0, 65, 297, "F");
-  
+
   let sideY = 20;
   let mainY = 20;
-  
+
   // Photo in sidebar - rounded
   if (formData.photo) {
     const imgSize = 45;
@@ -1237,13 +1237,13 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
     doc.roundedRect(imgX, sideY, imgSize, imgSize, 3, 3, 'S');
     sideY += imgSize + 8;
   }
-  
+
   // Profile section in sidebar
   doc.setFontSize(16);
   doc.setTextColor(37, 99, 235);
   doc.text(formData.fullName, 10, sideY);
   sideY += 10;
-  
+
   // Contact in sidebar
   doc.setFontSize(8);
   doc.setTextColor(71, 85, 105);
@@ -1261,7 +1261,7 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
     doc.text(addrLines, 10, sideY);
     sideY += addrLines.length * 5 + 10;
   }
-  
+
   // Skills in sidebar
   if (formData.skills) {
     doc.setFontSize(11);
@@ -1274,14 +1274,14 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
     doc.text(skillsLines, 10, sideY);
     sideY += skillsLines.length * 4 + 10;
   }
-  
+
   // Education in sidebar
   if (education.some(edu => edu.degree)) {
     doc.setFontSize(11);
     doc.setTextColor(37, 99, 235);
     doc.text("EDUCATION", 10, sideY);
     sideY += 6;
-    
+
     education.forEach(edu => {
       if (edu.degree) {
         doc.setFontSize(9);
@@ -1301,10 +1301,10 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
       }
     });
   }
-  
+
   // Main content
   const mainX = 70;
-  
+
   // Summary
   if (formData.summary) {
     doc.setFontSize(12);
@@ -1317,14 +1317,14 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
     doc.text(summaryLines, mainX, mainY);
     mainY += summaryLines.length * 5 + 12;
   }
-  
+
   // Work Experience
   if (workExperiences.some(exp => exp.jobTitle)) {
     doc.setFontSize(12);
     doc.setTextColor(37, 99, 235);
     doc.text("WORK EXPERIENCE", mainX, mainY);
     mainY += 7;
-    
+
     workExperiences.forEach(exp => {
       if (exp.jobTitle) {
         doc.setFontSize(11);
@@ -1339,7 +1339,7 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
         mainY += 4;
         doc.text(`${exp.startDate} - ${exp.endDate}`, mainX, mainY);
         mainY += 5;
-        
+
         if (exp.description) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -1347,7 +1347,7 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
           doc.text(lines, mainX, mainY);
           mainY += lines.length * 4 + 7;
         }
-        
+
         if (mainY > 270) {
           doc.addPage();
           doc.setFillColor(219, 234, 254);
@@ -1357,7 +1357,7 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
       }
     });
   }
-  
+
   // Certifications
   if (formData.certifications) {
     if (mainY > 250) {
@@ -1389,7 +1389,7 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
     doc.setTextColor(37, 99, 235);
     doc.text("REFERENCES", mainX, mainY);
     mainY += 7;
-    
+
     references.forEach(ref => {
       if (ref.name || ref.contact) {
         doc.setFontSize(10);
@@ -1398,7 +1398,7 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
         doc.text(ref.name, mainX, mainY);
         doc.setFont(undefined, "normal");
         mainY += 5;
-        
+
         if (ref.contact) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -1406,7 +1406,7 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
           doc.text(contactLines, mainX, mainY);
           mainY += contactLines.length * 4 + 6;
         }
-        
+
         if (mainY > 270) {
           doc.addPage();
           doc.setFillColor(219, 234, 254);
@@ -1416,7 +1416,7 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
       }
     });
   }
-  
+
   return doc;
 }
 
@@ -1424,7 +1424,7 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
 function generateTimelineTemplate(formData: FormData, workExperiences: WorkExperience[], education: Education[], references: Reference[], sectionOrder: Section[]) {
   const doc = new jsPDF();
   let y = 25;
-  
+
   // Photo - Circular, top right
   if (formData.photo) {
     const imgSize = 25;
@@ -1433,20 +1433,20 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
     doc.addImage(formData.photo, 'JPEG', imgX, imgY, imgSize, imgSize);
     doc.setDrawColor(37, 99, 235);
     doc.setLineWidth(1);
-    doc.circle(imgX + imgSize/2, imgY + imgSize/2, imgSize/2, 'S');
+    doc.circle(imgX + imgSize / 2, imgY + imgSize / 2, imgSize / 2, 'S');
   }
-  
+
   // Header
   doc.setFontSize(22);
   doc.setTextColor(37, 99, 235);
   doc.text(formData.fullName, 20, y);
   y += 10;
-  
+
   doc.setFontSize(9);
   doc.setTextColor(100, 116, 139);
   doc.text(`${formData.email} | ${formData.phone}`, 20, y);
   y += 15;
-  
+
   // Summary
   if (formData.summary) {
     doc.setFontSize(10);
@@ -1455,28 +1455,28 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
     doc.text(summaryLines, 20, y);
     y += summaryLines.length * 5 + 15;
   }
-  
+
   // Timeline line
   const timelineX = 25;
-  
+
   // Work Experience with timeline
   if (workExperiences.some(exp => exp.jobTitle)) {
     doc.setFontSize(14);
     doc.setTextColor(37, 99, 235);
     doc.text("CAREER TIMELINE", 20, y);
     y += 10;
-    
+
     workExperiences.forEach(exp => {
       if (exp.jobTitle) {
         // Timeline dot
         doc.setFillColor(37, 99, 235);
         doc.circle(timelineX, y - 2, 2, "F");
-        
+
         // Timeline line
         doc.setDrawColor(219, 234, 254);
         doc.setLineWidth(1);
         doc.line(timelineX, y, timelineX, y + 20);
-        
+
         // Content
         doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
@@ -1484,14 +1484,14 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
         doc.text(exp.jobTitle, 35, y);
         doc.setFont(undefined, "normal");
         y += 5;
-        
+
         doc.setFontSize(9);
         doc.setTextColor(100, 116, 139);
         doc.text(exp.company, 35, y);
         y += 4;
         doc.text(`${exp.startDate} - ${exp.endDate}`, 35, y);
         y += 6;
-        
+
         if (exp.description) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -1499,7 +1499,7 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
           doc.text(lines, 35, y);
           y += lines.length * 4 + 10;
         }
-        
+
         if (y > 260) {
           doc.addPage();
           y = 20;
@@ -1507,24 +1507,24 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
       }
     });
   }
-  
+
   // Education
   if (education.some(edu => edu.degree)) {
     if (y > 240) {
       doc.addPage();
       y = 20;
     }
-    
+
     doc.setFontSize(14);
     doc.setTextColor(37, 99, 235);
     doc.text("EDUCATION", 20, y);
     y += 10;
-    
+
     education.forEach(edu => {
       if (edu.degree) {
         doc.setFillColor(37, 99, 235);
         doc.circle(timelineX, y - 2, 2, "F");
-        
+
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
         doc.setFont(undefined, "bold");
@@ -1538,7 +1538,7 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
       }
     });
   }
-  
+
   // Skills
   if (formData.skills) {
     if (y > 250) {
@@ -1555,7 +1555,7 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
     doc.text(skillsLines, 20, y);
     y += skillsLines.length * 4 + 10;
   }
-  
+
   // Certifications
   if (formData.certifications) {
     if (y > 250) {
@@ -1583,19 +1583,19 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
     doc.setTextColor(37, 99, 235);
     doc.text("REFERENCES", 20, y);
     y += 8;
-    
+
     references.forEach(ref => {
       if (ref.name || ref.contact) {
         doc.setFillColor(37, 99, 235);
         doc.circle(timelineX, y - 2, 2, "F");
-        
+
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
         doc.setFont(undefined, "bold");
         doc.text(ref.name, 35, y);
         doc.setFont(undefined, "normal");
         y += 5;
-        
+
         if (ref.contact) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -1603,7 +1603,7 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
           doc.text(contactLines, 35, y);
           y += contactLines.length * 4 + 6;
         }
-        
+
         if (y > 270) {
           doc.addPage();
           y = 20;
@@ -1611,18 +1611,18 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
       }
     });
   }
-  
+
   return doc;
 }
 
 // Infographic Template - Visual with icons/badges
 function generateInfographicTemplate(formData: FormData, workExperiences: WorkExperience[], education: Education[], references: Reference[], sectionOrder: Section[]) {
   const doc = new jsPDF();
-  
+
   // Header with gradient simulation
   doc.setFillColor(37, 99, 235);
   doc.rect(0, 0, 210, 35, "F");
-  
+
   // Photo - Circular with white border in header
   if (formData.photo) {
     const imgSize = 24;
@@ -1630,36 +1630,36 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
     const imgY = 5.5;
     // White circle background
     doc.setFillColor(255, 255, 255);
-    doc.circle(imgX + imgSize/2, imgY + imgSize/2, imgSize/2 + 1.5, 'F');
+    doc.circle(imgX + imgSize / 2, imgY + imgSize / 2, imgSize / 2 + 1.5, 'F');
     doc.addImage(formData.photo, 'JPEG', imgX, imgY, imgSize, imgSize);
     doc.setDrawColor(255, 255, 255);
     doc.setLineWidth(1.5);
-    doc.circle(imgX + imgSize/2, imgY + imgSize/2, imgSize/2, 'S');
+    doc.circle(imgX + imgSize / 2, imgY + imgSize / 2, imgSize / 2, 'S');
   }
-  
+
   // Name
   doc.setFontSize(24);
   doc.setTextColor(255, 255, 255);
   doc.text(formData.fullName, 105, 20, { align: "center" });
-  
+
   // Professional Title
   if (formData.professionalTitle) {
     doc.setFontSize(11);
     doc.text(formData.professionalTitle, 105, 26, { align: "center" });
   }
-  
+
   // Contact
   doc.setFontSize(9);
   doc.text(`${formData.email} | ${formData.phone}`, 105, formData.professionalTitle ? 32 : 28, { align: "center" });
-  
+
   // LinkedIn and GitHub
   if (formData.linkedin || formData.github) {
     const linksInfo = [formData.linkedin, formData.github].filter(Boolean).join(" | ");
     doc.text(linksInfo, 105, formData.professionalTitle ? 37 : 33, { align: "center" });
   }
-  
+
   let y = formData.professionalTitle ? 55 : 50;
-  
+
   // Summary in box
   if (formData.summary) {
     doc.setFillColor(219, 234, 254);
@@ -1670,61 +1670,61 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
     doc.text(summaryLines, 20, y);
     y += summaryLines.length * 5 + 20;
   }
-  
+
   // Skills with badges
   if (formData.skills) {
     doc.setFontSize(13);
     doc.setTextColor(37, 99, 235);
     doc.text("CORE COMPETENCIES", 20, y);
     y += 10;
-    
+
     const skills = formData.skills.split(',').map(s => s.trim()).slice(0, 8);
     let xPos = 20;
     let yPos = y;
-    
+
     skills.forEach((skill, index) => {
       if (index > 0 && index % 3 === 0) {
         yPos += 12;
         xPos = 20;
       }
-      
+
       doc.setFillColor(37, 99, 235);
       doc.roundedRect(xPos, yPos - 5, 55, 8, 2, 2, "F");
       doc.setFontSize(8);
       doc.setTextColor(255, 255, 255);
       doc.text(skill.substring(0, 20), xPos + 27.5, yPos, { align: "center" });
-      
+
       xPos += 60;
     });
-    
+
     y = yPos + 15;
   }
-  
+
   // Experience
   if (workExperiences.some(exp => exp.jobTitle)) {
     doc.setFontSize(13);
     doc.setTextColor(37, 99, 235);
     doc.text("PROFESSIONAL JOURNEY", 20, y);
     y += 10;
-    
+
     workExperiences.forEach(exp => {
       if (exp.jobTitle) {
         // Icon circle
         doc.setFillColor(37, 99, 235);
         doc.circle(25, y - 2, 3, "F");
-        
+
         doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
         doc.setFont(undefined, "bold");
         doc.text(exp.jobTitle, 35, y);
         doc.setFont(undefined, "normal");
         y += 5;
-        
+
         doc.setFontSize(9);
         doc.setTextColor(100, 116, 139);
         doc.text(`${exp.company} | ${exp.startDate} - ${exp.endDate}`, 35, y);
         y += 5;
-        
+
         if (exp.description) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -1732,7 +1732,7 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
           doc.text(lines, 35, y);
           y += lines.length * 4 + 8;
         }
-        
+
         if (y > 260) {
           doc.addPage();
           y = 20;
@@ -1740,24 +1740,24 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
       }
     });
   }
-  
+
   // Education
   if (education.some(edu => edu.degree)) {
     if (y > 240) {
       doc.addPage();
       y = 20;
     }
-    
+
     doc.setFontSize(13);
     doc.setTextColor(37, 99, 235);
     doc.text("ACADEMIC BACKGROUND", 20, y);
     y += 10;
-    
+
     education.forEach(edu => {
       if (edu.degree) {
         doc.setFillColor(37, 99, 235);
         doc.circle(25, y - 2, 3, "F");
-        
+
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
         doc.setFont(undefined, "bold");
@@ -1772,7 +1772,7 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
     });
     y += 5;
   }
-  
+
   // Skills
   if (formData.skills) {
     if (y > 250) {
@@ -1789,7 +1789,7 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
     doc.text(skillsLines, 35, y);
     y += skillsLines.length * 4 + 10;
   }
-  
+
   // Certifications
   if (formData.certifications) {
     if (y > 250) {
@@ -1817,19 +1817,19 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
     doc.setTextColor(37, 99, 235);
     doc.text("REFERENCES", 20, y);
     y += 10;
-    
+
     references.forEach(ref => {
       if (ref.name || ref.contact) {
         doc.setFillColor(37, 99, 235);
         doc.circle(25, y - 2, 3, "F");
-        
+
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
         doc.setFont(undefined, "bold");
         doc.text(ref.name, 35, y);
         doc.setFont(undefined, "normal");
         y += 5;
-        
+
         if (ref.contact) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -1837,7 +1837,7 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
           doc.text(contactLines, 35, y);
           y += contactLines.length * 4 + 6;
         }
-        
+
         if (y > 270) {
           doc.addPage();
           y = 20;
@@ -1845,7 +1845,7 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
       }
     });
   }
-  
+
   return doc;
 }
 
@@ -1853,7 +1853,7 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
 function generateElegantTemplate(formData: FormData, workExperiences: WorkExperience[], education: Education[], references: Reference[], sectionOrder: Section[]) {
   const doc = new jsPDF();
   let y = 40;
-  
+
   // Photo - Small square, centered above name
   if (formData.photo) {
     const imgSize = 20;
@@ -1865,19 +1865,19 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
     doc.rect(imgX, imgY, imgSize, imgSize, 'S');
     y += 5;
   }
-  
+
   // Name - Centered, elegant
   doc.setFontSize(26);
   doc.setTextColor(15, 23, 42);
   doc.text(formData.fullName, 105, y, { align: "center" });
   y += 6;
-  
+
   // Thin line
   doc.setDrawColor(203, 213, 225);
   doc.setLineWidth(0.3);
   doc.line(70, y, 140, y);
   y += 8;
-  
+
   // Professional Title
   if (formData.professionalTitle) {
     doc.setFontSize(11);
@@ -1885,7 +1885,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
     doc.text(formData.professionalTitle, 105, y, { align: "center" });
     y += 6;
   }
-  
+
   // Contact - Centered
   doc.setFontSize(9);
   doc.setTextColor(100, 116, 139);
@@ -1893,7 +1893,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
   y += 4;
   doc.text(formData.phone, 105, y, { align: "center" });
   y += 4;
-  
+
   // LinkedIn and GitHub
   if (formData.linkedin || formData.github) {
     const linksInfo = [formData.linkedin, formData.github].filter(Boolean).join("  •  ");
@@ -1902,7 +1902,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
   } else {
     y += 11;
   }
-  
+
   // Summary
   if (formData.summary) {
     doc.setFontSize(10);
@@ -1914,14 +1914,14 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
     });
     y += 12;
   }
-  
+
   // Experience
   if (workExperiences.some(exp => exp.jobTitle)) {
     doc.setFontSize(11);
     doc.setTextColor(37, 99, 235);
     doc.text("Experience", 105, y, { align: "center" });
     y += 8;
-    
+
     workExperiences.forEach(exp => {
       if (exp.jobTitle) {
         doc.setFontSize(11);
@@ -1930,14 +1930,14 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
         doc.text(exp.jobTitle, 30, y);
         doc.setFont(undefined, "normal");
         y += 5;
-        
+
         doc.setFontSize(9);
         doc.setTextColor(100, 116, 139);
         doc.text(exp.company, 30, y);
         y += 4;
         doc.text(`${exp.startDate} - ${exp.endDate}`, 30, y);
         y += 6;
-        
+
         if (exp.description) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -1945,7 +1945,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
           doc.text(lines, 30, y);
           y += lines.length * 4 + 8;
         }
-        
+
         if (y > 265) {
           doc.addPage();
           y = 20;
@@ -1953,19 +1953,19 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
       }
     });
   }
-  
+
   // Education
   if (education.some(edu => edu.degree)) {
     if (y > 240) {
       doc.addPage();
       y = 20;
     }
-    
+
     doc.setFontSize(11);
     doc.setTextColor(37, 99, 235);
     doc.text("Education", 105, y, { align: "center" });
     y += 8;
-    
+
     education.forEach(edu => {
       if (edu.degree) {
         doc.setFontSize(10);
@@ -1981,7 +1981,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
       }
     });
   }
-  
+
   // Skills
   if (formData.skills) {
     if (y > 250) {
@@ -2001,7 +2001,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
     });
     y += 8;
   }
-  
+
   // Certifications
   if (formData.certifications) {
     if (y > 250) {
@@ -2032,7 +2032,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
     doc.setTextColor(37, 99, 235);
     doc.text("References", 105, y, { align: "center" });
     y += 8;
-    
+
     references.forEach(ref => {
       if (ref.name || ref.contact) {
         doc.setFontSize(10);
@@ -2041,7 +2041,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
         doc.text(ref.name, 30, y);
         doc.setFont(undefined, "normal");
         y += 5;
-        
+
         if (ref.contact) {
           doc.setFontSize(9);
           doc.setTextColor(71, 85, 105);
@@ -2049,7 +2049,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
           doc.text(contactLines, 30, y);
           y += contactLines.length * 4 + 6;
         }
-        
+
         if (y > 270) {
           doc.addPage();
           y = 20;
@@ -2057,7 +2057,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
       }
     });
   }
-  
+
   return doc;
 }
 
@@ -2069,30 +2069,30 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
   const margins = { left: 20, right: 20 };
   const centerX = pageWidth / 2;
   let y = 15;
-  
+
   // Brand color - Blue/Teal
   const brandColor = [30, 106, 170]; // RGB
   const lightBrandColor = [100, 150, 200]; // Lighter blue for links
-  
+
   // Top horizontal line
   doc.setDrawColor(brandColor[0], brandColor[1], brandColor[2]);
   doc.setLineWidth(0.5);
   doc.line(margins.left, y, pageWidth - margins.right, y);
   y += 10;
-  
+
   // Name - Large, Bold, Blue, Centered
   doc.setFont("times", "bold");
   doc.setFontSize(22);
   doc.setTextColor(brandColor[0], brandColor[1], brandColor[2]);
   doc.text(formData.fullName.toUpperCase(), centerX, y, { align: "center" });
   y += 8;
-  
+
   // Bottom horizontal line under name
   doc.setDrawColor(brandColor[0], brandColor[1], brandColor[2]);
   doc.setLineWidth(0.5);
   doc.line(margins.left, y, pageWidth - margins.right, y);
   y += 8;
-  
+
   // Contact info - address, phone, email on one line
   doc.setFont("times", "normal");
   doc.setFontSize(9);
@@ -2100,7 +2100,7 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
   const contactLine = `${formData.address}  •  ${formData.phone}  •  ${formData.email}`;
   doc.text(contactLine, centerX, y, { align: "center" });
   y += 5;
-  
+
   // LinkedIn and GitHub on separate line
   if (formData.linkedin || formData.github) {
     doc.setFontSize(8);
@@ -2109,7 +2109,7 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
     doc.text(socialLine, centerX, y, { align: "center" });
     y += 8;
   }
-  
+
   // Photo - Circular, centered
   if (formData.photo) {
     const imgSize = 25;
@@ -2117,7 +2117,7 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
     doc.addImage(formData.photo, 'JPEG', imgX, y, imgSize, imgSize);
     y += imgSize + 8;
   }
-  
+
   // Professional Title - Blue, centered
   if (formData.professionalTitle) {
     doc.setFont("times", "normal");
@@ -2126,29 +2126,29 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
     doc.text(formData.professionalTitle, centerX, y, { align: "center" });
     y += 10;
   }
-  
+
   // Helper function to draw section header with decorative lines
   const drawSectionHeader = (title: string, currentY: number) => {
     const titleWidth = doc.getTextWidth(title);
     const lineWidth = 35;
     const gap = 5;
-    
+
     doc.setFont("times", "normal");
     doc.setFontSize(12);
     doc.setTextColor(brandColor[0], brandColor[1], brandColor[2]);
     doc.text(title, centerX, currentY, { align: "center" });
-    
+
     // Left line
     doc.setDrawColor(180, 180, 180);
     doc.setLineWidth(0.3);
     doc.line(centerX - titleWidth / 2 - gap - lineWidth, currentY - 2, centerX - titleWidth / 2 - gap, currentY - 2);
-    
+
     // Right line
     doc.line(centerX + titleWidth / 2 + gap, currentY - 2, centerX + titleWidth / 2 + gap + lineWidth, currentY - 2);
-    
+
     return currentY + 7;
   };
-  
+
   // Helper to check page space
   const checkPageSpace = (requiredSpace: number) => {
     if (y + requiredSpace > pageHeight - 20) {
@@ -2157,12 +2157,12 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
     }
     return y;
   };
-  
+
   // Professional Summary - Render first after header
   if (formData.summary) {
     y = checkPageSpace(20);
     y = drawSectionHeader("Professional Summary", y);
-    
+
     doc.setFont("times", "normal");
     doc.setFontSize(9);
     doc.setTextColor(40, 40, 40);
@@ -2174,17 +2174,17 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
     });
     y += 8;
   }
-  
+
   // Render sections in order
   sectionOrder.forEach((section) => {
     if (section.type === 'workExperience' && workExperiences.length > 0 && workExperiences.some(we => we.jobTitle || we.company)) {
       y = checkPageSpace(20);
       y = drawSectionHeader("Work experience", y);
-      
+
       workExperiences.forEach((we, index) => {
         if (we.jobTitle || we.company) {
           y = checkPageSpace(25);
-          
+
           // Date range - left aligned
           doc.setFont("times", "normal");
           doc.setFontSize(10);
@@ -2192,13 +2192,13 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
           const dateText = `${we.startDate} - ${we.endDate}`;
           doc.text(dateText, margins.left, y);
           y += 6;
-          
+
           // Job Title - Bold
           doc.setFont("times", "bold");
           doc.setFontSize(10);
           doc.setTextColor(0, 0, 0);
           doc.text(we.jobTitle, margins.left + 40, y - 6);
-          
+
           // Company - Blue Italic
           if (we.company) {
             doc.setFont("times", "italic");
@@ -2207,7 +2207,7 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
             doc.text(we.company, margins.left + 40, y);
             y += 5;
           }
-          
+
           // Description - Bullet points
           if (we.description) {
             doc.setFont("times", "normal");
@@ -2232,22 +2232,22 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
       });
       y += 3;
     }
-    
+
     if (section.type === 'education' && education.length > 0 && education.some(edu => edu.degree || edu.institution)) {
       y = checkPageSpace(20);
       y = drawSectionHeader("Education", y);
-      
+
       education.forEach((edu) => {
         if (edu.degree || edu.institution) {
           y = checkPageSpace(15);
-          
+
           // Degree - Bold
           doc.setFont("times", "bold");
           doc.setFontSize(10);
           doc.setTextColor(0, 0, 0);
           doc.text(edu.degree, margins.left, y);
           y += 5;
-          
+
           // Institution - Blue Italic
           if (edu.institution) {
             doc.setFont("times", "italic");
@@ -2256,7 +2256,7 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
             doc.text(edu.institution, margins.left, y);
             y += 5;
           }
-          
+
           // Year
           if (edu.year) {
             doc.setFont("times", "normal");
@@ -2265,7 +2265,7 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
             doc.text(edu.year, margins.left, y);
             y += 5;
           }
-          
+
           // Description
           if (edu.description) {
             doc.setFont("times", "normal");
@@ -2283,11 +2283,11 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
       });
       y += 3;
     }
-    
+
     if (section.type === 'skills' && formData.skills) {
       y = checkPageSpace(20);
       y = drawSectionHeader("Skills", y);
-      
+
       doc.setFont("times", "normal");
       doc.setFontSize(9);
       doc.setTextColor(40, 40, 40);
@@ -2299,11 +2299,11 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
       });
       y += 8;
     }
-    
+
     if (section.type === 'certifications' && formData.certifications) {
       y = checkPageSpace(20);
       y = drawSectionHeader("Certifications", y);
-      
+
       doc.setFont("times", "normal");
       doc.setFontSize(9);
       doc.setTextColor(40, 40, 40);
@@ -2315,21 +2315,21 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
       });
       y += 8;
     }
-    
+
     if (section.type === 'references' && references.length > 0 && references.some(ref => ref.name || ref.contact)) {
       y = checkPageSpace(20);
       y = drawSectionHeader("References", y);
-      
+
       references.forEach((ref) => {
         if (ref.name || ref.contact) {
           y = checkPageSpace(12);
-          
+
           doc.setFont("times", "bold");
           doc.setFontSize(10);
           doc.setTextColor(0, 0, 0);
           doc.text(ref.name, margins.left, y);
           y += 5;
-          
+
           if (ref.contact) {
             doc.setFont("times", "normal");
             doc.setFontSize(9);
@@ -2346,6 +2346,6 @@ function generateCool2025Template(formData: FormData, workExperiences: WorkExper
       });
     }
   });
-  
+
   return doc;
 }

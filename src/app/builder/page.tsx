@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,7 +7,10 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus, Trash2, ArrowUp, ArrowDown, Palette, FileText, Sparkles, Briefcase, Code, GraduationCap, Columns, Calendar, BarChart3, Gem } from "lucide-react";
+import { Plus, Trash2, ArrowUp, ArrowDown, FileText, Sparkles, Briefcase, Code, GraduationCap, Gem, Award, Users, CheckCircle2, UserCircle } from "lucide-react";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { TemplateSidebar } from "@/components/builder/TemplateSidebar";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
@@ -42,6 +46,7 @@ interface Section {
     id: string;
     type: SectionType;
     title: string;
+    isOpen?: boolean;
 }
 
 const Builder = () => {
@@ -67,13 +72,13 @@ const Builder = () => {
         const iconMap = {
             classic: FileText,
             modern: Sparkles,
-            creative: Palette,
+            creative: Sparkles, // Replaced Palette
             executive: Briefcase,
             tech: Code,
             academic: GraduationCap,
-            twoColumn: Columns,
-            timeline: Calendar,
-            infographic: BarChart3,
+            twoColumn: FileText, // Replaced Columns
+            timeline: FileText, // Replaced Calendar
+            infographic: FileText, // Replaced BarChart3
             elegant: Gem,
             cool2025: Sparkles,
         };
@@ -91,11 +96,11 @@ const Builder = () => {
     }, []);
 
     const [sections, setSections] = useState<Section[]>([
-        { id: '1', type: 'workExperience', title: 'Work Experience' },
-        { id: '2', type: 'education', title: 'Education' },
-        { id: '3', type: 'skills', title: 'Skills' },
-        { id: '4', type: 'certifications', title: 'Certifications' },
-        { id: '5', type: 'references', title: 'References' },
+        { id: "work-experience", title: "Work Experience", type: "workExperience", isOpen: true },
+        { id: "education", title: "Education", type: "education", isOpen: true },
+        { id: "skills", title: "Skills", type: "skills", isOpen: true },
+        { id: "certifications", title: "Certifications", type: "certifications", isOpen: true },
+        { id: 'references', type: 'references', title: 'References', isOpen: true },
     ]);
 
     const [formData, setFormData] = useState({
@@ -331,703 +336,496 @@ const Builder = () => {
     const renderSection = (section: Section) => {
         const sectionIndex = sections.findIndex(s => s.id === section.id);
 
-        switch (section.type) {
-            case 'workExperience':
-                return (
-                    <div key={section.id} className="mb-8">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-2xl font-semibold text-foreground">{section.title}</h2>
-                            <div className="flex gap-2">
-                                <Button type="button" onClick={addWorkExperience} variant="outline" size="sm">
-                                    <Plus className="w-4 h-4 mr-2" />
-                                    Add More
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => moveSection(section.id, 'up')}
-                                    variant="ghost"
-                                    size="sm"
-                                    disabled={sectionIndex === 0}
-                                >
-                                    <ArrowUp className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => moveSection(section.id, 'down')}
-                                    variant="ghost"
-                                    size="sm"
-                                    disabled={sectionIndex === sections.length - 1}
-                                >
-                                    <ArrowDown className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => removeSection(section.id)}
-                                    variant="ghost"
-                                    size="sm"
-                                    className="text-destructive"
-                                >
-                                    <Trash2 className="w-4 h-4" />
-                                </Button>
-                            </div>
-                        </div>
-                        {workExperiences.map((exp, index) => (
-                            <Card key={exp.id} className="p-4 mb-4 bg-accent border-border">
-                                <div className="flex justify-between items-start mb-4">
-                                    <h3 className="font-semibold text-foreground">Position {index + 1}</h3>
-                                    <div className="flex gap-1">
-                                        <Button
-                                            type="button"
-                                            onClick={() => moveWorkExperience(exp.id, 'up')}
-                                            variant="ghost"
-                                            size="sm"
-                                            disabled={index === 0}
-                                        >
-                                            <ArrowUp className="w-4 h-4" />
-                                        </Button>
-                                        <Button
-                                            type="button"
-                                            onClick={() => moveWorkExperience(exp.id, 'down')}
-                                            variant="ghost"
-                                            size="sm"
-                                            disabled={index === workExperiences.length - 1}
-                                        >
-                                            <ArrowDown className="w-4 h-4" />
-                                        </Button>
-                                        <Button
-                                            type="button"
-                                            onClick={() => removeWorkExperience(exp.id)}
-                                            variant="ghost"
-                                            size="sm"
-                                            className="text-destructive hover:text-destructive"
-                                        >
-                                            <Trash2 className="w-4 h-4" />
-                                        </Button>
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <Label>Job Title</Label>
-                                        <Input
-                                            value={exp.jobTitle}
-                                            onChange={(e) => updateWorkExperience(exp.id, "jobTitle", e.target.value)}
-                                            placeholder="Software Engineer"
-                                            className="mt-1"
-                                        />
-                                    </div>
-                                    <div>
-                                        <Label>Company</Label>
-                                        <Input
-                                            value={exp.company}
-                                            onChange={(e) => updateWorkExperience(exp.id, "company", e.target.value)}
-                                            placeholder="Tech Corp"
-                                            className="mt-1"
-                                        />
-                                    </div>
-                                    <div>
-                                        <Label>Start Date</Label>
-                                        <Input
-                                            value={exp.startDate}
-                                            onChange={(e) => updateWorkExperience(exp.id, "startDate", e.target.value)}
-                                            placeholder="Jan 2020"
-                                            className="mt-1"
-                                        />
-                                    </div>
-                                    <div>
-                                        <Label>End Date</Label>
-                                        <Input
-                                            value={exp.endDate}
-                                            onChange={(e) => updateWorkExperience(exp.id, "endDate", e.target.value)}
-                                            placeholder="Present"
-                                            className="mt-1"
-                                        />
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <Label>Description</Label>
-                                        <Textarea
-                                            value={exp.description}
-                                            onChange={(e) => updateWorkExperience(exp.id, "description", e.target.value)}
-                                            placeholder="Key responsibilities and achievements..."
-                                            className="mt-1 min-h-[100px]"
-                                        />
-                                    </div>
-                                </div>
-                            </Card>
-                        ))}
-                    </div>
-                );
+        const getSectionIcon = (type: SectionType) => {
+            switch (type) {
+                case 'workExperience': return Briefcase;
+                case 'education': return GraduationCap;
+                case 'skills': return Code;
+                case 'certifications': return Award;
+                case 'references': return Users;
+                default: return FileText;
+            }
+        };
 
-            case 'education':
-                return (
-                    <div key={section.id} className="mb-8">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-2xl font-semibold text-foreground">{section.title}</h2>
-                            <div className="flex gap-2">
-                                <Button type="button" onClick={addEducation} variant="outline" size="sm">
-                                    <Plus className="w-4 h-4 mr-2" />
-                                    Add More
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => moveSection(section.id, 'up')}
-                                    variant="ghost"
-                                    size="sm"
-                                    disabled={sectionIndex === 0}
-                                >
-                                    <ArrowUp className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => moveSection(section.id, 'down')}
-                                    variant="ghost"
-                                    size="sm"
-                                    disabled={sectionIndex === sections.length - 1}
-                                >
-                                    <ArrowDown className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => removeSection(section.id)}
-                                    variant="ghost"
-                                    size="sm"
-                                    className="text-destructive"
-                                >
-                                    <Trash2 className="w-4 h-4" />
-                                </Button>
-                            </div>
-                        </div>
-                        {education.map((edu, index) => (
-                            <Card key={edu.id} className="p-4 mb-4 bg-accent border-border">
-                                <div className="flex justify-between items-start mb-4">
-                                    <h3 className="font-semibold text-foreground">Education {index + 1}</h3>
-                                    <div className="flex gap-1">
-                                        <Button
-                                            type="button"
-                                            onClick={() => moveEducation(edu.id, 'up')}
-                                            variant="ghost"
-                                            size="sm"
-                                            disabled={index === 0}
-                                        >
-                                            <ArrowUp className="w-4 h-4" />
-                                        </Button>
-                                        <Button
-                                            type="button"
-                                            onClick={() => moveEducation(edu.id, 'down')}
-                                            variant="ghost"
-                                            size="sm"
-                                            disabled={index === education.length - 1}
-                                        >
-                                            <ArrowDown className="w-4 h-4" />
-                                        </Button>
-                                        <Button
-                                            type="button"
-                                            onClick={() => removeEducation(edu.id)}
-                                            variant="ghost"
-                                            size="sm"
-                                            className="text-destructive hover:text-destructive"
-                                        >
-                                            <Trash2 className="w-4 h-4" />
-                                        </Button>
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <Label>Degree</Label>
-                                        <Input
-                                            value={edu.degree}
-                                            onChange={(e) => updateEducation(edu.id, "degree", e.target.value)}
-                                            placeholder="Bachelor of Science"
-                                            className="mt-1"
-                                        />
-                                    </div>
-                                    <div>
-                                        <Label>Institution</Label>
-                                        <Input
-                                            value={edu.institution}
-                                            onChange={(e) => updateEducation(edu.id, "institution", e.target.value)}
-                                            placeholder="University Name"
-                                            className="mt-1"
-                                        />
-                                    </div>
-                                    <div>
-                                        <Label>Year</Label>
-                                        <Input
-                                            value={edu.year}
-                                            onChange={(e) => updateEducation(edu.id, "year", e.target.value)}
-                                            placeholder="2020"
-                                            className="mt-1"
-                                        />
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <Label>Description</Label>
-                                        <Textarea
-                                            value={edu.description}
-                                            onChange={(e) => updateEducation(edu.id, "description", e.target.value)}
-                                            placeholder="Achievements, coursework, honors..."
-                                            className="mt-1 min-h-[80px]"
-                                        />
-                                    </div>
-                                </div>
-                            </Card>
-                        ))}
-                    </div>
-                );
+        const Icon = getSectionIcon(section.type);
 
-            case 'skills':
-                return (
-                    <div key={section.id} className="mb-8">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-2xl font-semibold text-foreground">{section.title}</h2>
-                            <div className="flex gap-2">
-                                <Button
-                                    type="button"
-                                    onClick={() => moveSection(section.id, 'up')}
-                                    variant="ghost"
-                                    size="sm"
-                                    disabled={sectionIndex === 0}
-                                >
-                                    <ArrowUp className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => moveSection(section.id, 'down')}
-                                    variant="ghost"
-                                    size="sm"
-                                    disabled={sectionIndex === sections.length - 1}
-                                >
-                                    <ArrowDown className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => removeSection(section.id)}
-                                    variant="ghost"
-                                    size="sm"
-                                    className="text-destructive"
-                                >
-                                    <Trash2 className="w-4 h-4" />
-                                </Button>
+        return (
+            <AccordionItem key={section.id} value={section.id} className="border border-border/50 rounded-xl bg-card/50 backdrop-blur-sm overflow-hidden shadow-sm">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-accent/50 transition-colors group">
+                    <div className="flex items-center justify-between w-full pr-4">
+                        <div className="flex items-center gap-3">
+                            <div className={`p - 2 rounded - lg ${section.type === 'workExperience' ? 'bg-blue-500/10 text-blue-600' :
+                                section.type === 'education' ? 'bg-purple-500/10 text-purple-600' :
+                                    section.type === 'skills' ? 'bg-green-500/10 text-green-600' :
+                                        section.type === 'certifications' ? 'bg-orange-500/10 text-orange-600' :
+                                            'bg-pink-500/10 text-pink-600'
+                                } `}>
+                                <Icon className="w-5 h-5" />
                             </div>
+                            <span className="text-lg font-semibold">{section.title}</span>
                         </div>
-                        <Textarea
-                            name="skills"
-                            value={formData.skills}
-                            onChange={handleInputChange}
-                            placeholder="e.g., JavaScript, React, Node.js, Project Management, etc."
-                            className="min-h-[100px]"
-                        />
-                    </div>
-                );
-
-            case 'certifications':
-                return (
-                    <div key={section.id} className="mb-8">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-2xl font-semibold text-foreground">
-                                {section.title} <span className="text-sm text-muted-foreground">(Optional)</span>
-                            </h2>
-                            <div className="flex gap-2">
-                                <Button
-                                    type="button"
-                                    onClick={() => moveSection(section.id, 'up')}
-                                    variant="ghost"
-                                    size="sm"
-                                    disabled={sectionIndex === 0}
-                                >
-                                    <ArrowUp className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => moveSection(section.id, 'down')}
-                                    variant="ghost"
-                                    size="sm"
-                                    disabled={sectionIndex === sections.length - 1}
-                                >
-                                    <ArrowDown className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => removeSection(section.id)}
-                                    variant="ghost"
-                                    size="sm"
-                                    className="text-destructive"
-                                >
-                                    <Trash2 className="w-4 h-4" />
-                                </Button>
-                            </div>
+                        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity" onClick={(e) => e.stopPropagation()}>
+                            <Button
+                                type="button"
+                                onClick={() => moveSection(section.id, 'up')}
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8"
+                                disabled={sectionIndex === 0}
+                            >
+                                <ArrowUp className="w-4 h-4" />
+                            </Button>
+                            <Button
+                                type="button"
+                                onClick={() => moveSection(section.id, 'down')}
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8"
+                                disabled={sectionIndex === sections.length - 1}
+                            >
+                                <ArrowDown className="w-4 h-4" />
+                            </Button>
+                            <Button
+                                type="button"
+                                onClick={() => removeSection(section.id)}
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
+                            >
+                                <Trash2 className="w-4 h-4" />
+                            </Button>
                         </div>
-                        <Textarea
-                            name="certifications"
-                            value={formData.certifications}
-                            onChange={handleInputChange}
-                            placeholder="List your professional certifications..."
-                            className="min-h-[100px]"
-                        />
                     </div>
-                );
-
-            case 'references':
-                return (
-                    <div key={section.id} className="mb-8">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-2xl font-semibold text-foreground">
-                                {section.title} <span className="text-sm text-muted-foreground">(Optional)</span>
-                            </h2>
-                            <div className="flex gap-2">
-                                <Button type="button" onClick={addReference} variant="outline" size="sm">
-                                    <Plus className="w-4 h-4 mr-2" />
-                                    Add More
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => moveSection(section.id, 'up')}
-                                    variant="ghost"
-                                    size="sm"
-                                    disabled={sectionIndex === 0}
-                                >
-                                    <ArrowUp className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => moveSection(section.id, 'down')}
-                                    variant="ghost"
-                                    size="sm"
-                                    disabled={sectionIndex === sections.length - 1}
-                                >
-                                    <ArrowDown className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    type="button"
-                                    onClick={() => removeSection(section.id)}
-                                    variant="ghost"
-                                    size="sm"
-                                    className="text-destructive"
-                                >
-                                    <Trash2 className="w-4 h-4" />
-                                </Button>
-                            </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6 pt-2">
+                    {section.type === 'workExperience' && (
+                        <div className="space-y-4">
+                            {workExperiences.map((exp, index) => (
+                                <Card key={exp.id} className="p-4 bg-background/50 border-border/50 relative group hover:border-primary/30 transition-colors">
+                                    <div className="absolute top-4 right-4 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <Button type="button" onClick={() => moveWorkExperience(exp.id, 'up')} variant="ghost" size="icon" className="h-7 w-7" disabled={index === 0}><ArrowUp className="w-3 h-3" /></Button>
+                                        <Button type="button" onClick={() => moveWorkExperience(exp.id, 'down')} variant="ghost" size="icon" className="h-7 w-7" disabled={index === workExperiences.length - 1}><ArrowDown className="w-3 h-3" /></Button>
+                                        <Button type="button" onClick={() => removeWorkExperience(exp.id)} variant="ghost" size="icon" className="h-7 w-7 text-destructive"><Trash2 className="w-3 h-3" /></Button>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">Job Title</Label>
+                                            <Input value={exp.jobTitle} onChange={(e) => updateWorkExperience(exp.id, "jobTitle", e.target.value)} placeholder="Software Engineer" className="mt-1 bg-transparent" />
+                                        </div>
+                                        <div>
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">Company</Label>
+                                            <Input value={exp.company} onChange={(e) => updateWorkExperience(exp.id, "company", e.target.value)} placeholder="Tech Corp" className="mt-1 bg-transparent" />
+                                        </div>
+                                        <div>
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">Start Date</Label>
+                                            <Input value={exp.startDate} onChange={(e) => updateWorkExperience(exp.id, "startDate", e.target.value)} placeholder="Jan 2020" className="mt-1 bg-transparent" />
+                                        </div>
+                                        <div>
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">End Date</Label>
+                                            <Input value={exp.endDate} onChange={(e) => updateWorkExperience(exp.id, "endDate", e.target.value)} placeholder="Present" className="mt-1 bg-transparent" />
+                                        </div>
+                                        <div className="md:col-span-2">
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">Description</Label>
+                                            <Textarea value={exp.description} onChange={(e) => updateWorkExperience(exp.id, "description", e.target.value)} placeholder="Key responsibilities..." className="mt-1 min-h-[100px] bg-transparent" />
+                                        </div>
+                                    </div>
+                                </Card>
+                            ))}
+                            <Button type="button" onClick={addWorkExperience} variant="outline" size="sm" className="w-full border-dashed border-2 hover:border-primary hover:text-primary">
+                                <Plus className="w-4 h-4 mr-2" /> Add Position
+                            </Button>
                         </div>
-                        {references.map((ref, index) => (
-                            <Card key={ref.id} className="p-4 mb-4 bg-accent border-border">
-                                <div className="flex justify-between items-start mb-4">
-                                    <h3 className="font-semibold text-foreground">Reference {index + 1}</h3>
-                                    <div className="flex gap-1">
-                                        <Button
-                                            type="button"
-                                            onClick={() => moveReference(ref.id, 'up')}
-                                            variant="ghost"
-                                            size="sm"
-                                            disabled={index === 0}
-                                        >
-                                            <ArrowUp className="w-4 h-4" />
-                                        </Button>
-                                        <Button
-                                            type="button"
-                                            onClick={() => moveReference(ref.id, 'down')}
-                                            variant="ghost"
-                                            size="sm"
-                                            disabled={index === references.length - 1}
-                                        >
-                                            <ArrowDown className="w-4 h-4" />
-                                        </Button>
-                                        <Button
-                                            type="button"
-                                            onClick={() => removeReference(ref.id)}
-                                            variant="ghost"
-                                            size="sm"
-                                            className="text-destructive hover:text-destructive"
-                                        >
-                                            <Trash2 className="w-4 h-4" />
-                                        </Button>
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <Label>Name</Label>
-                                        <Input
-                                            value={ref.name}
-                                            onChange={(e) => updateReference(ref.id, "name", e.target.value)}
-                                            placeholder="John Doe"
-                                            className="mt-1"
-                                        />
-                                    </div>
-                                    <div>
-                                        <Label>Contact Info</Label>
-                                        <Input
-                                            value={ref.contact}
-                                            onChange={(e) => updateReference(ref.id, "contact", e.target.value)}
-                                            placeholder="email@example.com, Position/Title"
-                                            className="mt-1"
-                                        />
-                                    </div>
-                                </div>
-                            </Card>
-                        ))}
-                    </div>
-                );
+                    )}
 
-            default:
-                return null;
-        }
+                    {section.type === 'education' && (
+                        <div className="space-y-4">
+                            {education.map((edu, index) => (
+                                <Card key={edu.id} className="p-4 bg-background/50 border-border/50 relative group hover:border-primary/30 transition-colors">
+                                    <div className="absolute top-4 right-4 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <Button type="button" onClick={() => moveEducation(edu.id, 'up')} variant="ghost" size="icon" className="h-7 w-7" disabled={index === 0}><ArrowUp className="w-3 h-3" /></Button>
+                                        <Button type="button" onClick={() => moveEducation(edu.id, 'down')} variant="ghost" size="icon" className="h-7 w-7" disabled={index === education.length - 1}><ArrowDown className="w-3 h-3" /></Button>
+                                        <Button type="button" onClick={() => removeEducation(edu.id)} variant="ghost" size="icon" className="h-7 w-7 text-destructive"><Trash2 className="w-3 h-3" /></Button>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">Degree</Label>
+                                            <Input value={edu.degree} onChange={(e) => updateEducation(edu.id, "degree", e.target.value)} placeholder="Bachelor of Science" className="mt-1 bg-transparent" />
+                                        </div>
+                                        <div>
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">Institution</Label>
+                                            <Input value={edu.institution} onChange={(e) => updateEducation(edu.id, "institution", e.target.value)} placeholder="University Name" className="mt-1 bg-transparent" />
+                                        </div>
+                                        <div>
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">Year</Label>
+                                            <Input value={edu.year} onChange={(e) => updateEducation(edu.id, "year", e.target.value)} placeholder="2020" className="mt-1 bg-transparent" />
+                                        </div>
+                                        <div className="md:col-span-2">
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">Description</Label>
+                                            <Textarea value={edu.description} onChange={(e) => updateEducation(edu.id, "description", e.target.value)} placeholder="Achievements..." className="mt-1 min-h-[80px] bg-transparent" />
+                                        </div>
+                                    </div>
+                                </Card>
+                            ))}
+                            <Button type="button" onClick={addEducation} variant="outline" size="sm" className="w-full border-dashed border-2 hover:border-primary hover:text-primary">
+                                <Plus className="w-4 h-4 mr-2" /> Add Education
+                            </Button>
+                        </div>
+                    )}
+
+                    {section.type === 'skills' && (
+                        <div className="space-y-2">
+                            <Label className="text-xs font-medium uppercase text-muted-foreground">Skills List</Label>
+                            <Textarea
+                                name="skills"
+                                value={formData.skills}
+                                onChange={handleInputChange}
+                                placeholder="e.g., JavaScript, React, Node.js..."
+                                className="min-h-[150px] bg-background/50 border-border/50 focus:border-primary/50"
+                            />
+                        </div>
+                    )}
+
+                    {section.type === 'certifications' && (
+                        <div className="space-y-2">
+                            <Label className="text-xs font-medium uppercase text-muted-foreground">Certifications List</Label>
+                            <Textarea
+                                name="certifications"
+                                value={formData.certifications}
+                                onChange={handleInputChange}
+                                placeholder="List your certifications..."
+                                className="min-h-[150px] bg-background/50 border-border/50 focus:border-primary/50"
+                            />
+                        </div>
+                    )}
+
+                    {section.type === 'references' && (
+                        <div className="space-y-4">
+                            {references.map((ref, index) => (
+                                <Card key={ref.id} className="p-4 bg-background/50 border-border/50 relative group hover:border-primary/30 transition-colors">
+                                    <div className="absolute top-4 right-4 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <Button type="button" onClick={() => moveReference(ref.id, 'up')} variant="ghost" size="icon" className="h-7 w-7" disabled={index === 0}><ArrowUp className="w-3 h-3" /></Button>
+                                        <Button type="button" onClick={() => moveReference(ref.id, 'down')} variant="ghost" size="icon" className="h-7 w-7" disabled={index === references.length - 1}><ArrowDown className="w-3 h-3" /></Button>
+                                        <Button type="button" onClick={() => removeReference(ref.id)} variant="ghost" size="icon" className="h-7 w-7 text-destructive"><Trash2 className="w-3 h-3" /></Button>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">Name</Label>
+                                            <Input value={ref.name} onChange={(e) => updateReference(ref.id, "name", e.target.value)} placeholder="John Doe" className="mt-1 bg-transparent" />
+                                        </div>
+                                        <div>
+                                            <Label className="text-xs font-medium uppercase text-muted-foreground">Contact Info</Label>
+                                            <Input value={ref.contact} onChange={(e) => updateReference(ref.id, "contact", e.target.value)} placeholder="email@example.com" className="mt-1 bg-transparent" />
+                                        </div>
+                                    </div>
+                                </Card>
+                            ))}
+                            <Button type="button" onClick={addReference} variant="outline" size="sm" className="w-full border-dashed border-2 hover:border-primary hover:text-primary">
+                                <Plus className="w-4 h-4 mr-2" /> Add Reference
+                            </Button>
+                        </div>
+                    )}
+                </AccordionContent>
+            </AccordionItem>
+        );
     };
 
     const generatePDF = () => {
-        if (!selectedTemplate) {
+        try {
+            if (!selectedTemplate) {
+                toast({
+                    title: "No Template Selected",
+                    description: "Please select a template first.",
+                    variant: "destructive"
+                });
+                // navigate.push("/templates"); // Removed navigation as sidebar is present
+                return;
+            }
+
+            if (!formData.fullName || !formData.email) {
+                toast({
+                    title: "Missing Information",
+                    description: "Please fill in at least your name and email.",
+                    variant: "destructive"
+                });
+                return;
+            }
+
+            const doc = generatePDFByTemplate(
+                selectedTemplate.style,
+                formData,
+                workExperiences,
+                education,
+                references,
+                sections.map(s => ({ type: s.type }))
+            );
+
+            doc.save(`${formData.fullName.replace(/\s+/g, '_')}_Resume.pdf`);
+
             toast({
-                title: "No Template Selected",
-                description: "Please select a template first.",
+                title: "Resume Generated!",
+                description: "Your resume has been successfully generated and downloaded.",
+            });
+        } catch (error) {
+            console.error("PDF Generation Error:", error);
+            toast({
+                title: "Generation Failed",
+                description: "An error occurred while generating your resume. Please try again.",
                 variant: "destructive"
             });
-            navigate.push("/templates");
-            return;
         }
+    };
 
-        if (!formData.fullName || !formData.email) {
-            toast({
-                title: "Missing Information",
-                description: "Please fill in at least your name and email.",
-                variant: "destructive"
-            });
-            return;
-        }
+    const DollarRain = () => {
+        const [mounted, setMounted] = useState(false);
+        const [dollars, setDollars] = useState<{ left: string; animationDuration: string; animationDelay: string; fontSize: string }[]>([]);
 
-        const doc = generatePDFByTemplate(
-            selectedTemplate.style,
-            formData,
-            workExperiences,
-            education,
-            references,
-            sections.map(s => ({ type: s.type }))
+        useEffect(() => {
+            setMounted(true);
+            setDollars(
+                [...Array(10)].map(() => ({
+                    left: `${Math.random() * 100}%`,
+                    animationDuration: `${Math.random() * 3 + 4}s`,
+                    animationDelay: `${Math.random() * 5}s`,
+                    fontSize: `${Math.random() * 20 + 20}px`,
+                }))
+            );
+        }, []);
+
+        if (!mounted) return null;
+
+        return (
+            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+                {dollars.map((style, i) => (
+                    <div
+                        key={i}
+                        className="absolute animate-fall opacity-20"
+                        style={{
+                            left: style.left,
+                            top: '-100px',
+                            animationDuration: style.animationDuration,
+                            animationDelay: style.animationDelay,
+                            fontSize: style.fontSize,
+                        }}
+                    >
+                        💵
+                    </div>
+                ))}
+            </div>
         );
-
-        doc.save(`${formData.fullName.replace(/\s+/g, '_')}_Resume.pdf`);
-
-        toast({
-            title: "Resume Generated!",
-            description: "Your resume has been successfully generated and downloaded.",
-        });
     };
 
     return (
-        <div className="min-h-screen bg-background pb-20">
-            {/* Header */}
-            <div className="bg-background border-b border-border sticky top-0 z-10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-                    <div className="flex items-center gap-4">
-                        <Link href="/" className="text-primary hover:underline">
-                            ← Home
-                        </Link>
-                        <div className="h-6 w-px bg-border"></div>
-                        <Link href="/templates" className="text-muted-foreground hover:text-foreground">
-                            Change Template
-                        </Link>
-                        <div className="h-6 w-px bg-border"></div>
-                        <span className="font-semibold text-foreground">
-                            {selectedTemplate?.name || "Resume Builder"}
-                        </span>
-                    </div>
-                    <Button onClick={generatePDF} className="gradient-primary shadow-elegant">
-                        Download PDF
-                    </Button>
+        <SidebarProvider>
+            <div className="flex h-screen w-full bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 overflow-hidden relative">
+                {/* Background Effects */}
+                <DollarRain />
+                <div className="fixed inset-0 -z-10">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-100/40 via-white to-slate-100/40 animate-gradient-shift"></div>
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-200/40 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+                    <div className="absolute top-0 right-1/4 w-96 h-96 bg-indigo-200/40 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+                    <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-cyan-200/40 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
                 </div>
-            </div>
 
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Main Form */}
-                    <div className="lg:col-span-2 space-y-8">
-                        {/* Personal Info */}
-                        <Card className="p-6 bg-card border-border shadow-sm">
-                            <h2 className="text-2xl font-semibold text-foreground mb-6">Personal Information</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="md:col-span-2 flex items-center gap-4 mb-4">
-                                    <div className="w-24 h-24 bg-accent rounded-full flex items-center justify-center overflow-hidden border-2 border-border relative group">
-                                        {formData.photo ? (
-                                            <>
-                                                <img src={formData.photo} alt="Profile" className="w-full h-full object-cover" />
-                                                <button
-                                                    onClick={removePhoto}
-                                                    className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white transition-opacity"
-                                                >
-                                                    <Trash2 className="w-6 h-6" />
-                                                </button>
-                                            </>
-                                        ) : (
-                                            <div className="text-muted-foreground text-xs text-center p-2">
-                                                Upload Photo
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div>
-                                        <Label htmlFor="photo-upload" className="cursor-pointer">
-                                            <div className="flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors">
-                                                <Plus className="w-4 h-4" />
-                                                <span>Upload Photo</span>
-                                            </div>
-                                            <Input
-                                                id="photo-upload"
-                                                type="file"
-                                                accept="image/*"
-                                                className="hidden"
-                                                onChange={handlePhotoUpload}
-                                            />
-                                        </Label>
-                                        <p className="text-xs text-muted-foreground mt-2">Recommended: Square JPG or PNG</p>
+                <TemplateSidebar />
+                <SidebarInset className="flex-1 h-full overflow-hidden bg-transparent">
+                    <div className="h-full overflow-y-auto pb-20 w-full relative z-10">
+                        {/* Header */}
+                        <div className="bg-white/70 backdrop-blur-xl border-b border-white/20 sticky top-0 z-20 shadow-sm">
+                            <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+                                <div className="flex items-center gap-4">
+                                    <SidebarTrigger className="-ml-2 text-slate-600 hover:text-blue-600 transition-colors" />
+                                    <Link href="/" className="flex items-center gap-2 group">
+                                        <div className="p-1.5 bg-blue-600/10 rounded-lg group-hover:bg-blue-600/20 transition-colors">
+                                            <Sparkles className="w-4 h-4 text-blue-600" />
+                                        </div>
+                                        <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Back to Home</span>
+                                    </Link>
+                                    <div className="h-4 w-[1px] bg-slate-300 mx-2" />
+                                    <div className="flex items-center gap-2 text-sm text-slate-500">
+                                        <span className="font-medium text-slate-900">{selectedTemplate?.name || "Select a Template"}</span>
                                     </div>
                                 </div>
-
-                                <div>
-                                    <Label>Full Name</Label>
-                                    <Input
-                                        name="fullName"
-                                        value={formData.fullName}
-                                        onChange={handleInputChange}
-                                        placeholder="John Doe"
-                                        className="mt-1"
-                                    />
-                                </div>
-                                <div>
-                                    <Label>Professional Title</Label>
-                                    <Input
-                                        name="professionalTitle"
-                                        value={formData.professionalTitle}
-                                        onChange={handleInputChange}
-                                        placeholder="Software Engineer"
-                                        className="mt-1"
-                                    />
-                                </div>
-                                <div>
-                                    <Label>Email</Label>
-                                    <Input
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleInputChange}
-                                        placeholder="john@example.com"
-                                        className="mt-1"
-                                    />
-                                </div>
-                                <div>
-                                    <Label>Phone</Label>
-                                    <Input
-                                        name="phone"
-                                        value={formData.phone}
-                                        onChange={handleInputChange}
-                                        placeholder="+1 234 567 890"
-                                        className="mt-1"
-                                    />
-                                </div>
-                                <div className="md:col-span-2">
-                                    <Label>Address</Label>
-                                    <Input
-                                        name="address"
-                                        value={formData.address}
-                                        onChange={handleInputChange}
-                                        placeholder="City, Country"
-                                        className="mt-1"
-                                    />
-                                </div>
-                                <div>
-                                    <Label>LinkedIn</Label>
-                                    <Input
-                                        name="linkedin"
-                                        value={formData.linkedin}
-                                        onChange={handleInputChange}
-                                        placeholder="linkedin.com/in/johndoe"
-                                        className="mt-1"
-                                    />
-                                </div>
-                                <div>
-                                    <Label>GitHub / Portfolio</Label>
-                                    <Input
-                                        name="github"
-                                        value={formData.github}
-                                        onChange={handleInputChange}
-                                        placeholder="github.com/johndoe"
-                                        className="mt-1"
-                                    />
-                                </div>
-                                <div className="md:col-span-2">
-                                    <Label>Professional Summary</Label>
-                                    <Textarea
-                                        name="summary"
-                                        value={formData.summary}
-                                        onChange={handleInputChange}
-                                        placeholder="Brief overview of your professional background..."
-                                        className="mt-1 min-h-[100px]"
-                                    />
+                                <div className="flex items-center gap-3">
+                                    <Button variant="outline" size="sm" className="gap-2 border-blue-200 text-blue-700 hover:bg-blue-50 hover:text-blue-800 hover:border-blue-300 transition-all">
+                                        <Sparkles className="w-4 h-4" />
+                                        Auto-Fill
+                                    </Button>
+                                    <Button onClick={generatePDF} size="sm" className="gap-2 bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20 transition-all hover:scale-105">
+                                        <FileText className="w-4 h-4" />
+                                        Download PDF
+                                    </Button>
                                 </div>
                             </div>
-                        </Card>
-
-                        {/* Dynamic Sections */}
-                        {sections.map(section => renderSection(section))}
-
-                        {/* Add Section Buttons */}
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <Button variant="outline" onClick={() => addSection('workExperience')} className="h-auto py-4 flex flex-col gap-2">
-                                <Briefcase className="w-6 h-6" />
-                                <span>Add Work Experience</span>
-                            </Button>
-                            <Button variant="outline" onClick={() => addSection('education')} className="h-auto py-4 flex flex-col gap-2">
-                                <GraduationCap className="w-6 h-6" />
-                                <span>Add Education</span>
-                            </Button>
-                            <Button variant="outline" onClick={() => addSection('skills')} className="h-auto py-4 flex flex-col gap-2">
-                                <Code className="w-6 h-6" />
-                                <span>Add Skills</span>
-                            </Button>
-                            <Button variant="outline" onClick={() => addSection('certifications')} className="h-auto py-4 flex flex-col gap-2">
-                                <Award className="w-6 h-6" />
-                                <span>Add Certifications</span>
-                            </Button>
-                            <Button variant="outline" onClick={() => addSection('references')} className="h-auto py-4 flex flex-col gap-2">
-                                <Users className="w-6 h-6" />
-                                <span>Add References</span>
-                            </Button>
                         </div>
-                    </div>
 
-                    {/* Sidebar */}
-                    <div className="lg:col-span-1">
-                        <div className="sticky top-24 space-y-6">
-                            <Card className="p-6 bg-card border-border shadow-sm">
-                                <h3 className="font-semibold text-foreground mb-4">Resume Strength</h3>
-                                <div className="w-full bg-secondary rounded-full h-2.5 mb-2">
-                                    <div className="bg-primary h-2.5 rounded-full" style={{ width: '85%' }}></div>
+                        <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                            {/* Main Form Area */}
+                            <div className="lg:col-span-12 space-y-8">
+                                {/* Personal Info Section */}
+                                <div className="space-y-6">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-lg shadow-blue-500/20 text-white">
+                                            <UserCircle className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h2 className="text-2xl font-bold text-slate-800">Personal Information</h2>
+                                            <p className="text-slate-500">Start with the basics to get hired.</p>
+                                        </div>
+                                    </div>
+
+                                    <Accordion type="single" collapsible defaultValue="personal-info" className="w-full space-y-4">
+                                        <AccordionItem value="personal-info" className="border border-white/40 rounded-2xl bg-white/60 backdrop-blur-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+                                            <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-white/40 transition-colors">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="p-2 bg-blue-100/50 rounded-lg text-blue-600">
+                                                        <UserCircle className="w-5 h-5" />
+                                                    </div>
+                                                    <span className="text-lg font-semibold text-slate-800">Personal Details</span>
+                                                </div>
+                                            </AccordionTrigger>
+                                            <AccordionContent className="px-6 pb-8 pt-2">
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                    <div className="space-y-2">
+                                                        <Label className="text-xs font-bold uppercase text-slate-500 tracking-wider">Full Name</Label>
+                                                        <Input name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="e.g. John Doe" className="bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all h-11" />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label className="text-xs font-bold uppercase text-slate-500 tracking-wider">Professional Title</Label>
+                                                        <Input name="professionalTitle" value={formData.professionalTitle} onChange={handleInputChange} placeholder="e.g. Senior Software Engineer" className="bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all h-11" />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label className="text-xs font-bold uppercase text-slate-500 tracking-wider">Email</Label>
+                                                        <Input name="email" value={formData.email} onChange={handleInputChange} placeholder="john@example.com" className="bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all h-11" />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label className="text-xs font-bold uppercase text-slate-500 tracking-wider">Phone</Label>
+                                                        <Input name="phone" value={formData.phone} onChange={handleInputChange} placeholder="+1 (555) 000-0000" className="bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all h-11" />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label className="text-xs font-bold uppercase text-slate-500 tracking-wider">Location</Label>
+                                                        <Input name="address" value={formData.address} onChange={handleInputChange} placeholder="City, Country" className="bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all h-11" />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label className="text-xs font-bold uppercase text-slate-500 tracking-wider">LinkedIn (Optional)</Label>
+                                                        <Input name="linkedin" value={formData.linkedin} onChange={handleInputChange} placeholder="linkedin.com/in/johndoe" className="bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all h-11" />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label className="text-xs font-bold uppercase text-slate-500 tracking-wider">GitHub (Optional)</Label>
+                                                        <Input name="github" value={formData.github} onChange={handleInputChange} placeholder="github.com/johndoe" className="bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all h-11" />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label className="text-xs font-bold uppercase text-slate-500 tracking-wider">Photo</Label>
+                                                        <div className="flex items-center gap-4">
+                                                            <Input type="file" accept="image/*" onChange={handlePhotoUpload} className="bg-white/50 border-slate-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all h-11 pt-1.5" />
+                                                            {formData.photo && (
+                                                                <Button type="button" variant="destructive" size="icon" onClick={removePhoto} className="h-10 w-10 shrink-0 rounded-full shadow-sm">
+                                                                    <Trash2 className="w-4 h-4" />
+                                                                </Button>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-span-1 md:col-span-2 space-y-2">
+                                                        <Label className="text-xs font-bold uppercase text-slate-500 tracking-wider">Professional Summary</Label>
+                                                        <Textarea name="summary" value={formData.summary} onChange={handleInputChange} placeholder="Briefly describe your professional background and key achievements..." className="bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 transition-all min-h-[120px] resize-y" />
+                                                    </div>
+                                                </div>
+                                            </AccordionContent>
+                                        </AccordionItem>
+
+                                        {/* Dynamic Sections */}
+                                        {sections.map(section => renderSection(section))}
+                                    </Accordion>
+
+                                    {/* Add Section Grid */}
+                                    <div className="space-y-4">
+                                        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider ml-1">Add Section</h3>
+                                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                            <Button variant="outline" onClick={() => addSection('workExperience')} className="h-auto py-6 flex flex-col gap-3 bg-card/50 hover:bg-primary/5 hover:border-primary/50 transition-all group border-border/50 shadow-sm">
+                                                <div className="p-2 bg-blue-500/10 text-blue-600 rounded-lg group-hover:scale-110 transition-transform">
+                                                    <Briefcase className="w-6 h-6" />
+                                                </div>
+                                                <span className="font-medium">Work Experience</span>
+                                            </Button>
+                                            <Button variant="outline" onClick={() => addSection('education')} className="h-auto py-6 flex flex-col gap-3 bg-card/50 hover:bg-primary/5 hover:border-primary/50 transition-all group border-border/50 shadow-sm">
+                                                <div className="p-2 bg-purple-500/10 text-purple-600 rounded-lg group-hover:scale-110 transition-transform">
+                                                    <GraduationCap className="w-6 h-6" />
+                                                </div>
+                                                <span className="font-medium">Education</span>
+                                            </Button>
+                                            <Button variant="outline" onClick={() => addSection('skills')} className="h-auto py-6 flex flex-col gap-3 bg-card/50 hover:bg-primary/5 hover:border-primary/50 transition-all group border-border/50 shadow-sm">
+                                                <div className="p-2 bg-green-500/10 text-green-600 rounded-lg group-hover:scale-110 transition-transform">
+                                                    <Code className="w-6 h-6" />
+                                                </div>
+                                                <span className="font-medium">Skills</span>
+                                            </Button>
+                                            <Button variant="outline" onClick={() => addSection('certifications')} className="h-auto py-6 flex flex-col gap-3 bg-card/50 hover:bg-primary/5 hover:border-primary/50 transition-all group border-border/50 shadow-sm">
+                                                <div className="p-2 bg-orange-500/10 text-orange-600 rounded-lg group-hover:scale-110 transition-transform">
+                                                    <Award className="w-6 h-6" />
+                                                </div>
+                                                <span className="font-medium">Certifications</span>
+                                            </Button>
+                                            <Button variant="outline" onClick={() => addSection('references')} className="h-auto py-6 flex flex-col gap-3 bg-card/50 hover:bg-primary/5 hover:border-primary/50 transition-all group border-border/50 shadow-sm">
+                                                <div className="p-2 bg-pink-500/10 text-pink-600 rounded-lg group-hover:scale-110 transition-transform">
+                                                    <Users className="w-6 h-6" />
+                                                </div>
+                                                <span className="font-medium">References</span>
+                                            </Button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p className="text-sm text-muted-foreground">
-                                    Your resume is looking great! Add more details to reach 100%.
-                                </p>
-                            </Card>
 
-                            <Card className="p-6 bg-card border-border shadow-sm">
-                                <h3 className="font-semibold text-foreground mb-4">Tips</h3>
-                                <ul className="space-y-3 text-sm text-muted-foreground">
-                                    <li className="flex gap-2">
-                                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                                        <span>Use action verbs (Managed, Created, Led)</span>
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                                        <span>Quantify achievements where possible</span>
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                                        <span>Tailor your summary to the job role</span>
-                                    </li>
-                                    <li className="flex gap-2">
-                                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                                        <span>Keep it concise and easy to read</span>
-                                    </li>
-                                </ul>
-                            </Card>
+                                {/* Sidebar */}
+                                <div className="lg:col-span-1">
+                                    <div className="sticky top-24 space-y-6">
+                                        <Card className="p-6 bg-card/50 backdrop-blur-sm border-border/50 shadow-lg relative overflow-hidden">
+                                            <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                                            <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+                                                <Sparkles className="w-4 h-4 text-primary" />
+                                                Resume Strength
+                                            </h3>
+                                            <div className="w-full bg-secondary/50 rounded-full h-3 mb-2 overflow-hidden">
+                                                <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-full rounded-full animate-pulse" style={{ width: '85%' }}></div>
+                                            </div>
+                                            <p className="text-sm text-muted-foreground">
+                                                Your resume is looking great! Add more details to reach 100%.
+                                            </p>
+                                        </Card>
+
+                                        <Card className="p-6 bg-card/50 backdrop-blur-sm border-border/50 shadow-lg">
+                                            <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+                                                <Gem className="w-4 h-4 text-primary" />
+                                                Pro Tips
+                                            </h3>
+                                            <ul className="space-y-4 text-sm text-muted-foreground">
+                                                <li className="flex gap-3 items-start">
+                                                    <div className="mt-0.5 p-1 bg-green-500/10 rounded-full text-green-600 shrink-0">
+                                                        <CheckCircle2 className="w-3 h-3" />
+                                                    </div>
+                                                    <span>Use action verbs like <strong>Managed</strong>, <strong>Created</strong>, and <strong>Led</strong>.</span>
+                                                </li>
+                                                <li className="flex gap-3 items-start">
+                                                    <div className="mt-0.5 p-1 bg-green-500/10 rounded-full text-green-600 shrink-0">
+                                                        <CheckCircle2 className="w-3 h-3" />
+                                                    </div>
+                                                    <span>Quantify achievements (e.g., "Increased sales by 20%").</span>
+                                                </li>
+                                                <li className="flex gap-3 items-start">
+                                                    <div className="mt-0.5 p-1 bg-green-500/10 rounded-full text-green-600 shrink-0">
+                                                        <CheckCircle2 className="w-3 h-3" />
+                                                    </div>
+                                                    <span>Tailor your summary to the specific job role.</span>
+                                                </li>
+                                            </ul>
+                                        </Card>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </SidebarInset>
             </div>
-        </div>
+        </SidebarProvider>
     );
 };
-
-import { Award, Users, CheckCircle2 } from "lucide-react";
 
 export default Builder;

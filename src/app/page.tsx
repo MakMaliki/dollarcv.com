@@ -142,8 +142,8 @@ export default function Home() {
 
             {/* Navigation Links */}
             <div className="hidden md:flex items-center gap-8">
-              {['Home', 'About Us', 'Resumes', 'Selection Criteria', 'Prices'].map((item, index) => {
-                const links = ['/', '/about', '/templates', '/selection-criteria', '/pricing'];
+              {['Home', 'About Us', 'Selection Criteria', 'Prices'].map((item, index) => {
+                const links = ['/', '/about', '/selection-criteria', '/pricing'];
                 return (
                   <Link
                     key={item}
@@ -174,7 +174,7 @@ export default function Home() {
 
             {/* Main Headline with Gradient - Single Line */}
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black leading-tight tracking-tight text-slate-900">
-              Create Your <span className="animate-shimmer inline-block transform hover:scale-105 transition-transform duration-300 cursor-default text-blue-700">Dream Resume</span> In Minutes
+              Create Your <span className="animate-shimmer inline-block transform hover:scale-105 transition-transform duration-300 cursor-default text-blue-700">Dollar Resume</span> In Minutes
             </h1>
 
             {/* Motivational Subheading with ATS Focus */}
@@ -215,16 +215,6 @@ export default function Home() {
                   </span>
                 </Button>
               </Link>
-
-              <Link href="/templates">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="px-10 py-8 text-xl font-bold bg-white border-2 border-slate-200 text-slate-700 hover:border-blue-600 hover:text-blue-700 shadow-lg transform hover:scale-105 transition-all duration-300 rounded-xl"
-                >
-                  Browse Templates
-                </Button>
-              </Link>
             </div>
 
             {/* Trust Indicators - Reduced bottom padding */}
@@ -260,7 +250,7 @@ export default function Home() {
             </div>
             <AnimatedCounter />
             <p className="text-sm text-slate-500 max-w-md">
-              Join thousands of professionals creating their dream resumes every day
+              Join thousands of professionals creating their Dollar resumes every day
             </p>
           </div>
         </div>
