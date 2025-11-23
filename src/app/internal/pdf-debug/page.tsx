@@ -2,10 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { generatePDFByTemplate } from "@/lib/pdfTemplates";
-import * as pdfjsLib from "pdfjs-dist";
 
-// Set worker source
-pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const templates = [
     { id: "classic", style: "classic" },
@@ -79,6 +76,9 @@ export default function PdfDebugPage() {
 
     useEffect(() => {
         const renderAll = async () => {
+            const pdfjsLib = await import("pdfjs-dist");
+            pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+
             for (const template of templates) {
                 try {
                     setStatus(prev => ({ ...prev, [template.id]: "Generating..." }));

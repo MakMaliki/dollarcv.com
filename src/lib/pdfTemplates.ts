@@ -570,9 +570,9 @@ function generateModernTemplate(formData: FormData, workExperiences: WorkExperie
       if (ref.name || ref.contact) {
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(ref.name, 20, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
 
         if (ref.contact) {
@@ -670,9 +670,9 @@ function generateCreativeTemplate(formData: FormData, workExperiences: WorkExper
 
         doc.setFontSize(12);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(exp.jobTitle, 22, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 6;
 
         doc.setFontSize(10);
@@ -849,9 +849,9 @@ function generateExecutiveTemplate(formData: FormData, workExperiences: WorkExpe
       if (exp.jobTitle) {
         doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(exp.jobTitle, mainX, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
         doc.setFontSize(9);
         doc.setTextColor(100, 116, 139);
@@ -948,9 +948,9 @@ function generateTechTemplate(formData: FormData, workExperiences: WorkExperienc
       if (exp.jobTitle) {
         doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(`> ${exp.jobTitle}`, 20, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
         doc.setFontSize(9);
         doc.setTextColor(100, 116, 139);
@@ -1135,9 +1135,9 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
       if (edu.degree) {
         doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(edu.degree, 20, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
         doc.setFontSize(10);
         doc.setTextColor(100, 116, 139);
@@ -1172,9 +1172,9 @@ function generateAcademicTemplate(formData: FormData, workExperiences: WorkExper
       if (exp.jobTitle) {
         doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(exp.jobTitle, 20, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
         doc.setFontSize(10);
         doc.setTextColor(100, 116, 139);
@@ -1286,10 +1286,10 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
       if (edu.degree) {
         doc.setFontSize(9);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         const degreeLines = doc.splitTextToSize(edu.degree, 50);
         doc.text(degreeLines, 10, sideY);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         sideY += degreeLines.length * 4 + 3;
         doc.setFontSize(8);
         doc.setTextColor(71, 85, 105);
@@ -1329,9 +1329,9 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
       if (exp.jobTitle) {
         doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(exp.jobTitle, mainX, mainY);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         mainY += 5;
         doc.setFontSize(9);
         doc.setTextColor(100, 116, 139);
@@ -1394,9 +1394,9 @@ function generateTwoColumnTemplate(formData: FormData, workExperiences: WorkExpe
       if (ref.name || ref.contact) {
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(ref.name, mainX, mainY);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         mainY += 5;
 
         if (ref.contact) {
@@ -1480,9 +1480,9 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
         // Content
         doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(exp.jobTitle, 35, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
 
         doc.setFontSize(9);
@@ -1527,9 +1527,9 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
 
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(edu.degree, 35, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
         doc.setFontSize(9);
         doc.setTextColor(100, 116, 139);
@@ -1591,9 +1591,9 @@ function generateTimelineTemplate(formData: FormData, workExperiences: WorkExper
 
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(ref.name, 35, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
 
         if (ref.contact) {
@@ -1715,9 +1715,9 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
 
         doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(exp.jobTitle, 35, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
 
         doc.setFontSize(9);
@@ -1760,9 +1760,9 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
 
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(edu.degree, 35, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
         doc.setFontSize(9);
         doc.setTextColor(100, 116, 139);
@@ -1825,9 +1825,9 @@ function generateInfographicTemplate(formData: FormData, workExperiences: WorkEx
 
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(ref.name, 35, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
 
         if (ref.contact) {
@@ -1908,7 +1908,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
     doc.setFontSize(10);
     doc.setTextColor(71, 85, 105);
     const summaryLines = doc.splitTextToSize(formData.summary, 150);
-    summaryLines.forEach(line => {
+    summaryLines.forEach((line: string) => {
       doc.text(line, 105, y, { align: "center" });
       y += 5;
     });
@@ -1926,9 +1926,9 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
       if (exp.jobTitle) {
         doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(exp.jobTitle, 30, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
 
         doc.setFontSize(9);
@@ -1970,9 +1970,9 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
       if (edu.degree) {
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(edu.degree, 30, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
         doc.setFontSize(9);
         doc.setTextColor(100, 116, 139);
@@ -1995,7 +1995,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
     doc.setFontSize(9);
     doc.setTextColor(71, 85, 105);
     const skillsLines = doc.splitTextToSize(formData.skills, 150);
-    skillsLines.forEach(line => {
+    skillsLines.forEach((line: string) => {
       doc.text(line, 105, y, { align: "center" });
       y += 4;
     });
@@ -2015,7 +2015,7 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
     doc.setFontSize(9);
     doc.setTextColor(71, 85, 105);
     const certLines = doc.splitTextToSize(formData.certifications, 150);
-    certLines.forEach(line => {
+    certLines.forEach((line: string) => {
       doc.text(line, 105, y, { align: "center" });
       y += 4;
     });
@@ -2037,9 +2037,9 @@ function generateElegantTemplate(formData: FormData, workExperiences: WorkExperi
       if (ref.name || ref.contact) {
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text(ref.name, 30, y);
-        doc.setFont(undefined, "normal");
+        doc.setFont("helvetica", "normal");
         y += 5;
 
         if (ref.contact) {
