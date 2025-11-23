@@ -318,7 +318,8 @@ body {
   background: linear-gradient(135deg, hsl(var(--primary)) 0%, rgb(147, 51, 234) 100%);
 }
 
-/* Dollar Rain Animation */
+/* Dollar Rain Animation - Creates falling dollar emojis effect */
+/* Emojis fall from top to bottom with rotation and fade in/out */
 @keyframes fall {
   0% {
     transform: translateY(-100px) rotate(0deg);
