@@ -1,0 +1,13 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/about/page": "app/about/page.js",
+  "/builder/page": "app/builder/page.js",
+  "/buy/page": "app/buy/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/internal/pdf-debug/page": "app/internal/pdf-debug/page.js",
+  "/page": "app/page.js",
+  "/pricing/page": "app/pricing/page.js",
+  "/selection-criteria/page": "app/selection-criteria/page.js",
+  "/templates/page": "app/templates/page.js"
+}

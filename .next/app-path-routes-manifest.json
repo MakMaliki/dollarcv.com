@@ -1,0 +1,13 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/about/page": "/about",
+  "/builder/page": "/builder",
+  "/buy/page": "/buy",
+  "/favicon.ico/route": "/favicon.ico",
+  "/internal/pdf-debug/page": "/internal/pdf-debug",
+  "/page": "/",
+  "/pricing/page": "/pricing",
+  "/selection-criteria/page": "/selection-criteria",
+  "/templates/page": "/templates"
+}
