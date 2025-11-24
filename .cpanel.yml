@@ -1,25 +1,21 @@
 deployment:
   tasks:
-    # 1. Define the temporary build path (the repository checkout path)
+    # Define the temporary build path (the repository checkout path)
     - export REPOPATH=/home/dollqwvj/repositories/dollarcv.com/
     
-    # 2. Define the Node.js Application Root path (where the App setup runs from)
-    - export APPPATH=/home/dollqwvj/app/
+    # Define the NEW Application Root path (which is the Domain's Document Root)
+    - export APPPATH=/home/dollqwvj/dollarcv.com/
     
-    # 3. Cleanup and sync the source code into the Application Root (APPPATH)
-    #    We exclude node_modules, .git, and .next to keep the sync fast and clean.
+    # Cleanup and sync the source code into the Application Root (APPPATH)
     - /bin/rm -rf $APPPATH/*
     - /bin/rsync -av --exclude='node_modules' --exclude='.git' --exclude='.next' $REPOPATH $APPPATH
     
-    # 4. Change directory to the Application Root
+    # Change directory to the Application Root
     - cd $APPPATH
     
-    # 5. Activate the virtual environment
+    # Activate the virtual environment (adjust if the nodevenv path changed)
     - source /home/dollqwvj/nodevenv/dollarcv.com/20/bin/activate
     
-    # 6. Install dependencies
+    # Install dependencies & Build the Next.js project
     - npm install
-    
-    # 7. Build the Next.js project
-    #    The .next folder will be created inside $APPPATH
     - npm run build
