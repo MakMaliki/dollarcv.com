@@ -1,8 +1,8 @@
----
 deployment:
   tasks:
     - export DEPLOYPATH=/home/dollqwvj/public_html/
-    - /bin/cp -R * $DEPLOYPATH
+    - /bin/rm -rf $DEPLOYPATH/*
+    - /bin/rsync -av --exclude='node_modules' --exclude='.git' --exclude='.next' /home/dollqwvj/repositories/dollarcv.com/ $DEPLOYPATH
     - cd $DEPLOYPATH
     - source /home/dollqwvj/nodevenv/dollarcv.com/20/bin/activate
     - npm install
