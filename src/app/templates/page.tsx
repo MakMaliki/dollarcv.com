@@ -26,28 +26,20 @@ const Templates = () => {
     const recommendations: Record<Template['style'], string[]> = {
         classic: ["Formal corporate roles", "Conservative industries", "ATS-friendly"],
         modern: ["Clean layout", "Startups & product roles", "Fast scanning"],
-        creative: ["Design-forward", "Marketing/creative fields", "Colorful accents"],
         executive: ["Senior roles", "Leadership focus", "Strong sidebar"],
         tech: ["Developers & engineers", "Technical skills emphasis", "Code cues"],
         academic: ["Research/education", "Publications first", "Detailed experience"],
         twoColumn: ["Space efficiency", "Showcase many items", "Clear sections"],
-        timeline: ["Career progression", "Storytelling format", "Milestones"],
-        infographic: ["Visual impact", "Quick skim", "Badges & icons"],
-        elegant: ["Minimalist", "Consulting & PM", "Refined typography"],
         cool2025: ["Modern professional", "Blue accent theme", "Centered design"],
     };
 
     const highlights: Record<Template['style'], string[]> = {
         classic: ["Blue accents", "Centered header", "Traditional sections"],
         modern: ["Large name left", "Minimal headers", "Whitespace"],
-        creative: ["Color blocks", "Rounded accents", "Bold section titles"],
         executive: ["Dark sidebar", "Main content focus", "Premium look"],
         tech: ["Green accent", "Inline metadata", "Monospace/code feel"],
         academic: ["Education first", "Centered name", "Thin rules"],
         twoColumn: ["Left sidebar", "Right content", "Compact typography"],
-        timeline: ["Vertical line", "Dots per job", "Chronological flow"],
-        infographic: ["Badges", "Highlight boxes", "Iconic sections"],
-        elegant: ["Centered sections", "Hairline separators", "Calm palette"],
         cool2025: ["Blue header lines", "Circular photo", "Professional serif font"],
     };
     const templates: Template[] = [
@@ -62,12 +54,6 @@ const Templates = () => {
             name: "Modern Minimalist",
             description: "Clean design with lots of white space",
             style: "modern"
-        },
-        {
-            id: "creative",
-            name: "Creative Bold",
-            description: "Colorful accents and modern fonts for creative fields",
-            style: "creative"
         },
         {
             id: "executive",
@@ -94,24 +80,6 @@ const Templates = () => {
             style: "twoColumn"
         },
         {
-            id: "timeline",
-            name: "Timeline",
-            description: "Career progression emphasis with timeline view",
-            style: "timeline"
-        },
-        {
-            id: "infographic",
-            name: "Infographic",
-            description: "Visual, icon-based presentation",
-            style: "infographic"
-        },
-        {
-            id: "elegant",
-            name: "Simple Elegant",
-            description: "Understated, professional simplicity",
-            style: "elegant"
-        },
-        {
             id: "cool2025",
             name: "Cool2025",
             description: "Modern professional with blue accents and centered layout",
@@ -123,14 +91,10 @@ const Templates = () => {
         switch (style) {
             case "classic": return <FileText className="w-12 h-12 text-primary" />;
             case "modern": return <Sparkles className="w-12 h-12 text-primary" />;
-            case "creative": return <Palette className="w-12 h-12 text-primary" />;
             case "executive": return <Briefcase className="w-12 h-12 text-primary" />;
             case "tech": return <Code className="w-12 h-12 text-primary" />;
             case "academic": return <GraduationCap className="w-12 h-12 text-primary" />;
             case "twoColumn": return <Columns className="w-12 h-12 text-primary" />;
-            case "timeline": return <Calendar className="w-12 h-12 text-primary" />;
-            case "infographic": return <BarChart3 className="w-12 h-12 text-primary" />;
-            case "elegant": return <Gem className="w-12 h-12 text-primary" />;
             case "cool2025": return <Sparkles className="w-12 h-12 text-primary" />;
             default: return <FileText className="w-12 h-12 text-primary" />;
         }
@@ -140,14 +104,10 @@ const Templates = () => {
         const previews: Record<string, string> = {
             classic: "/classic_preview.png",
             modern: "/modern_preview.png",
-            creative: "/creative_preview.png",
             executive: "/executive_preview.png",
             tech: "/tech_preview.png",
             academic: "/academic_preview.png",
             twoColumn: "/twoColumn_preview.png",
-            timeline: "/timeline_preview.png",
-            infographic: "/infographic_preview.png",
-            elegant: "/elegant_preview.png",
             cool2025: "/cool2025_preview.png",
         };
 

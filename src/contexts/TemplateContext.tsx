@@ -6,7 +6,7 @@ export interface Template {
     id: string;
     name: string;
     description: string;
-    style: "classic" | "modern" | "creative" | "executive" | "tech" | "academic" | "twoColumn" | "timeline" | "infographic" | "elegant" | "cool2025";
+    style: "classic" | "modern" | "executive" | "tech" | "academic" | "twoColumn" | "cool2025";
 }
 
 interface TemplateContextType {

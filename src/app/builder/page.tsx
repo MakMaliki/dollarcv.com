@@ -57,14 +57,10 @@ const Builder = () => {
     const templates: Template[] = [
         { id: "classic", name: "Classic Professional", description: "Traditional, formal layout perfect for corporate roles", style: "classic" },
         { id: "modern", name: "Modern Minimalist", description: "Clean design with lots of white space", style: "modern" },
-        { id: "creative", name: "Creative Bold", description: "Colorful accents and modern fonts for creative fields", style: "creative" },
         { id: "executive", name: "Executive", description: "Premium, sophisticated look for senior positions", style: "executive" },
         { id: "tech", name: "Tech/Developer", description: "Code-inspired design for technical professionals", style: "tech" },
         { id: "academic", name: "Academic", description: "Research and education focused layout", style: "academic" },
         { id: "twoColumn", name: "Two Column", description: "Efficient space usage with dual-column design", style: "twoColumn" },
-        { id: "timeline", name: "Timeline", description: "Career progression focused with timeline view", style: "timeline" },
-        { id: "infographic", name: "Infographic", description: "Visual resume with icons and graphics", style: "infographic" },
-        { id: "elegant", name: "Elegant", description: "Refined and minimalist design", style: "elegant" },
         { id: "cool2025", name: "Cool2025", description: "Modern professional with blue accent theme", style: "cool2025" },
     ];
 
@@ -72,14 +68,10 @@ const Builder = () => {
         const iconMap = {
             classic: FileText,
             modern: Sparkles,
-            creative: Sparkles, // Replaced Palette
             executive: Briefcase,
             tech: Code,
             academic: GraduationCap,
-            twoColumn: FileText, // Replaced Columns
-            timeline: FileText, // Replaced Calendar
-            infographic: FileText, // Replaced BarChart3
-            elegant: Gem,
+            twoColumn: FileText,
             cool2025: Sparkles,
         };
         return iconMap[style];
