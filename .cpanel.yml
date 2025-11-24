@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/dollqwvj/repositories/dollarcv.com
+    - export DEPLOYPATH=/home/dollqwvj/public_html/
     - /bin/cp -R * $DEPLOYPATH
     - cd $DEPLOYPATH
     - npm install
